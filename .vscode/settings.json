@@ -224,6 +224,22 @@
         "wpragmas"
     ],
     /* Files */
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/*.aux": true,
+        "**/*.bcf": true,
+        "**/*.fdb_latexmk": true,
+        "**/*.fls": true,
+        "**/*.loa": true,
+        "**/*.log": true,
+        "**/*.lol": true,
+        "**/*.run.xml": true,
+        "**/*.toc": true,
+    },
     "files.associations": {
         "*.html": "html",
         "*.txt": "cmake",

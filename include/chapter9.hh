@@ -1,20 +1,20 @@
 /**
- * @file chapter8.hh
+ * @file chapter9.hh
  * @author Ashton Scott Hellwig (ahellwig@student.cccs.edu)
  * @brief This file contains the prototypes used for
  * calculating the vote statistics of data input by the user.
- * @date 2020-04-16
+ * @date 2020-04-22
  *
- * Assignment: Module 4 Chapter 8 Programming Assignment.
+ * Assignment: Module 5 Chapter 9 Programming Assignment.
  * Description: This file contains the prototypes used for
  * calculating the vote statistics of data input by the user.
  * Instructor: Jeffrey Hemmes.
  * Course: [CSC 160] Introduction to Programming (C++).
- * Date: 16 April 2020.
+ * Date: 22 April 2020.
  */
 
-#ifndef _CHAPTER8_HH_INCLUDED
-#define _CHAPTER8_HH_INCLUDED
+#ifndef _CHAPTER9_HH_INCLUDED
+#define _CHAPTER9_HH_INCLUDED
 #include <string>
 
 #ifndef NDEBUG
@@ -26,7 +26,7 @@
 
 #include "ashwig_exceptions.hh"
 
-namespace chapter8 {
+namespace chapter9 {
 
 class Candidate {
 public:
@@ -58,5 +58,5 @@ protected:
   // clang-format disable
 }; // class Candidate
 // clang-format enable
-} // namespace chapter8
-#endif // !CHAPTER8_HH_INCLUDED
+} // namespace chapter9
+#endif // !CHAPTER9_HH_INCLUDED

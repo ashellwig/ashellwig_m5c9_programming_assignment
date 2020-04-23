@@ -3,7 +3,7 @@
  * @author Ashton Scott Hellwig (ahellwig@student.cccs.edu)
  * @brief This file contains global function definitions used to emulate
  *   system-dependent Windows libraries.
- * @date 2020-04-02
+ * @date 2020-04-22
  *
  * Assignment: 6 Programming Assignment
  * Description: This file contains global function definitions used to emulate

@@ -2,17 +2,17 @@
  * @file main.cxx
  * @author Ashton Scott Hellwig (ahellwig@student.cccs.edu)
  * @brief This file contains the main function to run the program.
- * @date 2020-04-16
+ * @date 2020-04-22
  *
- * Assignment: Module 4 Chapter 8 Programming Assignment
+ * Assignment: Module 5 Chapter 9 Programming Assignment
  * Description: This file contains the main function to run the program.
  * Instructor: Jeffrey Hemmes
  * Course:
  *   [CSC 160] Introduction to Programming (C++)
- * Date: 16 April 2020
+ * Date: 22 April 2020
  */
 
-#include "../include/chapter8.hh"          // TBD
+#include "../include/chapter9.hh"          // TBD
 #include "../include/general_functions.hh" // pauseprompt
 #include <iostream>                        // std::cout
 
@@ -22,7 +22,7 @@
 int main() {
 
   // Generate our candidate data
-  chapter8::Candidate candidateList;
+  chapter9::Candidate candidateList;
   candidateList.printResult();
 
   // "Press enter to continue..."

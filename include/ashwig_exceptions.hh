@@ -3,9 +3,9 @@
  * @author Ashton Scott Hellwig (ahellwig@student.cccs.edu)
  * @brief This file contains the definitions of exceptions classes to be used
  * in the programming assignments for FRCC's CSC160 at CCCOnline.
- * @date 2020-04-14
+ * @date 2020-04-22
  *
- * Assignment: Module 4 Chapter 8 Programming Assignment
+ * Assignment: Module 5 Chapter 9 Programming Assignment
  * Description: This file contains the definitions of exceptions classes to be
  * used in the programming assignments for FRCC's CSC160 at CCCOnline.
  * functions, the previously mentioned compiler flags must be used.

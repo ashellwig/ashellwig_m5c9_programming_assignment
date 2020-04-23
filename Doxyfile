@@ -32,7 +32,7 @@ DOXYFILE_ENCODING      = UTF-8
 # title of most generated pages and in a few other places.
 # The default value is: My Project.
 
-PROJECT_NAME           = ashellwig_m4c8_programming_assignment
+PROJECT_NAME           = ashellwig_m5c9_programming_assignment
 
 # The PROJECT_NUMBER tag can be used to enter a project or revision number. This
 # could be handy for archiving the generated documentation or if some version
@@ -44,7 +44,7 @@ PROJECT_NUMBER         = 0.1
 # for a project that appears at the top of each page and should give viewer a
 # quick idea about the purpose of the project. Keep the description short.
 
-PROJECT_BRIEF          = "CSC160-C11 SP20 Module 4 Chapter 8 Programming Assignment"
+PROJECT_BRIEF          = "CSC160-C11 SP20 Module 5 Chapter 9 Programming Assignment"
 
 # With the PROJECT_LOGO tag one can specify a logo or an icon that is included
 # in the documentation. The maximum height of the logo should not exceed 55
@@ -58,7 +58,7 @@ PROJECT_LOGO           =
 # entered, it will be relative to the location where doxygen was started. If
 # left blank the current directory will be used.
 
-OUTPUT_DIRECTORY       = /home/ahellwig/Documents/School/CSC160/Module-4/Programming-Assignments/ashellwig_m4c8_programming_assignment/out/doc/doxygen
+OUTPUT_DIRECTORY       = /home/ahellwig/Documents/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/out/doc/doxygen
 
 # If the CREATE_SUBDIRS tag is set to YES then doxygen will create 4096 sub-
 # directories (in 2 levels) under the output directory of each output format and
