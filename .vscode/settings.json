@@ -248,6 +248,7 @@
         "*.html": "html",
         "*.txt": "cmake",
         "*.in": "cpp",
+        "Ch9Ex2*.txt": "plaintext",
         "iostream": "cpp",
         "cctype": "cpp",
         "clocale": "cpp",
