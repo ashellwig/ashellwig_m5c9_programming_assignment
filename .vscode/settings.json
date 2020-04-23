@@ -169,6 +169,20 @@
     "python.dataScience.enabled": false,
     "python.workspaceSymbols.enabled": false,
     "vsintellicode.python.completionsEnabled": false,
+    /* Shellscript */
+    "[shellscript]": {
+        "files.eol": "\n",
+        "editor.formatOnSave": true
+    },
+    "shellformat.path": "/home/ahellwig/go/bin/shfmt",
+    "shellformat.flag": "-ln bash -i 2 -bn -ci -sr -kp",
+    "shellformat.effectLanguages": [
+        "shellscript",
+        "dotenv",
+        "ignore",
+        "gitignore"
+    ],
+    "shellcheck.enable": false,
     /* General Tools */
     // Terminal
     "terminal.integrated.env.linux": {
@@ -176,6 +190,20 @@
     },
     "terminal.integrated.inheritEnv": true,
     // Spell Checker
+    "cSpell.enableFiletypes": [
+        "!yaml",
+        "!asciidoc",
+        "!c",
+        "cpp",
+        "!git-commit",
+        "!html",
+        "latex",
+        "!markdown",
+        "!plaintext",
+        "!restructuredtext",
+        "!text",
+        "!yml"
+    ],
     "cSpell.logLevel": "None",
     "cSpell.ignorePaths": [
         "**/package-lock.json",
@@ -188,10 +216,6 @@
         "README.md"
     ],
     "cSpell.allowCompoundWords": true,
-    "cSpell.enabledFiletypes": [
-        "cpp",
-        "latex"
-    ],
     "cSpell.words": [
         "autoreconf",
         "dndebug",

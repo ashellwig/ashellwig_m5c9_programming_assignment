@@ -1,7 +1,9 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-## Options
-set -o errexit -o pipefail -o noclobber -o nounset
+## Set Script Options
+set -o errexit
+set -o pipefail
+set -o nounset
 
 ## Variables
 declare prev_DIR
@@ -29,10 +31,34 @@ cd "${temp_DIR}"
 
 git clone 'https://github.com/catchorg/Catch2.git' "${temp_DIR}/catch2"
 cd "${temp_DIR}/catch2"
-cmake '-Bbuild' '-H.' "-DCMAKE_INSTALL_PREFIX=${project_source_DIR}/out/cmake" '-DBUILD_TESTING=OFF'
-cmake --build 
+
+if [[ -d "${project_source_DIR}/include/catch2" ]]; then
+  rm -r "${project_source_DIR}/include/catch2"
+fi
+
+cmake '-Bbuild' '-H.' "-DCMAKE_INSTALL_PREFIX=${project_source_DIR}" '-DBUILD_TESTING=OFF' '-DCATCH_BUILD_EXAMPLES=OFF' '-DCATCH_BUILD_TESTING=OFF' '-DCATCH_INSTALL_DOCS=OFF' '-DCATCH_INSTALL_HELPERS=on'
+cmake --build build/ --target install
+
+if [[ -d "${project_source_DIR}/cmake/Catch2" ]]; then
+  rm -r "${project_source_DIR}/cmake/Catch2/"
+fi
+
+mkdir "${project_source_DIR}/cmake/Catch2"
+
+mv "${project_source_DIR}"/lib/cmake/Catch2/* "${project_source_DIR}"/cmake/Catch2
+
+rm -rf "${project_source_DIR}/lib"
+rm -rf "${project_source_DIR}/share"
 
 cd "${prev_DIR}"
+
+# Delete temp dir
 rm -rf "${temp_DIR}"
+
+# Unset script options
+set -u errexit
+set -u pipefail
+set -u noclobber
+set -u nounset
 
 exit 0

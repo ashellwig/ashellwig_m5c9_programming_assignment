@@ -351,3 +351,6 @@ install-sh
 Makefile.in
 missing
 *.log
+
+share/
+lib/
