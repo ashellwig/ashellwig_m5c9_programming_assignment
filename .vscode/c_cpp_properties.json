@@ -29,7 +29,8 @@
       "compilerArgs": [
         "-std=gnu++2a",
         "-x",
-        "c++"
+        "c++",
+        "-isystem include/catch2"
       ],
       "cStandard": "c11",
       "cppStandard": "c++20"
