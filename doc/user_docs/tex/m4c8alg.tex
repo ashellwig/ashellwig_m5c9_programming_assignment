@@ -1,0 +1,31 @@
+% !TEX root = ../main.tex
+%
+% Module 4 Chapter 8 Program Algorithm
+% CSC160-C00: Computer Science I (C++) (Jeffrey Hemmes)
+% Author: Ashton Hellwig
+% Date: 02 April 2020
+%
+
+
+\begin{algorithm}[H]
+    \caption{Chapter 8 Program Algorithm}
+    \vspace{12pt}
+    \begin{algorithmic}[1]
+      \Function{calculateMostVotes}{$names$, $votes$}
+        \State $numCandidates\gets 5$
+        \State $mostVotesIndex\gets 0$
+        \State
+        \For{$i = 0$, $i < numCandidates$, \Call{increment}{$i$, $1$}}
+          \State 
+        \EndFor
+        \State\State\Return{mostVotesIndex}
+      \EndFunction
+      \Function{printResult}{$names$, $votes$}
+      \EndFunction
+      \Procedure{main}{}
+        \State\Call{getInput}{$names$, $votes$}
+        \State\Call{printResult}{$names$, $votes$}
+      \EndProcedure
+    \end{algorithmic}
+    \label{alg}
+  \end{algorithm}

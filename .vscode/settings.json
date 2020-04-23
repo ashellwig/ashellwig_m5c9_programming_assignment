@@ -1,0 +1,297 @@
+// {
+// "python.formatting.provider": "yapf",
+// "python.linting.enabled": false,
+// "cSpell.enabled": false
+// }
+{
+    /* JSON */
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features",
+        "editor.formatOnSave": true
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features",
+        "editor.formatOnSave": true
+    },
+    /* C and C++ */
+    "C_Cpp.autoAddFileAssociations": true,
+    "C_Cpp.configurationWarnings": "Enabled",
+    "C_Cpp.default.enableConfigurationSquiggles": true,
+    "C_Cpp.default.configurationProvider": "${default}",
+    "clang-format.language.cpp.style": "file",
+    "clang-format.style": "file",
+    "[cpp]": {
+        "editor.defaultFormatter": "xaver.clang-format",
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true
+    },
+    "C_Cpp.clang_format_style": "file",
+    "C_Cpp.clang_format_fallbackStyle": "LLVM",
+    "clang-format.executable": "clang-format",
+    "clang.completion.enable": true,
+    "clang-format.language.cpp.enable": true,
+    "C_Cpp.default.cppStandard": "c++20",
+    "C_Cpp.default.compilerPath": "/usr/bin/g++",
+    // Compiler Options
+    // "C_Cpp.default.systemIncludePath": [
+    //     "/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0",
+    //     "/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/x86_64-pc-linux-gnu",
+    //     "/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/../../../../include/c++/9.3.0/backward",
+    //     "/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include",
+    //     "/usr/local/include",
+    //     "/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include-fixed",
+    //     "/usr/include"
+    // ],
+    "C_Cpp.default.compilerArgs": [
+        "-xc++",
+        "-Wall",
+        "-std=gnu++2a", // Change this to -std=c++20 if llvm (clang++)
+        "-DDEBUG",
+        "-Iinclude",
+        "-Itest/include",
+        "-isystem include/catch2"
+    ],
+    "C_Cpp.clang_format_sortIncludes": true,
+    // CMAKE
+    "[cmake]": {
+        "editor.defaultFormatter": "ms-vscode.cmake-tools",
+        "editor.tabSize": 2
+    },
+    "cmake.environment": {
+        "DESTDIR": "/home/ahellwig/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/out/cmake"
+    },
+    "cmake.configureArgs": [
+        "-DCMAKE_INSTALL_PREFIX=/home/ahellwig/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/out/cmake"
+    ],
+    "cmake.cmakePath": "/usr/bin/cmake",
+    "cmake.buildDirectory": "${workspaceFolder}/build",
+    "cmake.emscriptenSearchDirs": [
+        "/home/ahellwig/SDKs/emsdk"
+    ],
+    "cmake.buildEnvironment": {
+        "DESTDIR": "/home/ahellwig/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/out/cmake"
+    },
+    "cmake.configureEnvironment": {
+        "DESTDIR": "/home/ahellwig/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/out/cmake"
+    },
+    // Doxygen
+    "doxdocgen.generic.briefTemplate": "@brief {text} ",
+    "doxdocgen.generic.paramTemplate": "@param {param} ",
+    "doxdocgen.generic.returnTemplate": "@return {type} ",
+    "doxdocgen.file.fileTemplate": "@file {name}",
+    "doxdocgen.cpp.tparamTemplate": "@tparam {param} ",
+    "doxdocgen.generic.dateTemplate": "@date {date}",
+    "doxdocgen.file.copyrightTag": [
+        "@copyright Copyright (c) {year}"
+    ],
+    "doxdocgen.file.versionTag": "@version 0.1.0",
+    "doxdocgen.generic.authorTag": "@author {author} <{email}>",
+    /* Latex */
+    "[latex]": {
+        "editor.formatOnPaste": false,
+        "editor.formatOnSave": false,
+        "editor.suggestSelection": "recentlyUsedByPrefix",
+        "editor.codeActionsOnSave": {
+            "source.fixAll": false,
+            "source.organizeImports": false
+        }
+    },
+    "[bibtex]": {
+        "editor.formatOnPaste": false,
+        "editor.formatOnSave": false,
+        "editor.suggestSelection": "recentlyUsedByPrefix",
+        "editor.codeActionsOnSave": {
+            "source.fixAll": false,
+            "source.organizeImports": false
+        }
+    },
+    "latex-workshop.latex.tools": [
+        {
+            "name": "latexmk",
+            "command": "latexmk",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "-pdf",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ]
+        },
+        {
+            "name": "bibtex",
+            "command": "bibtex",
+            "args": [
+                "%DOCFILE%"
+            ]
+        }
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "latexmk",
+            "tools": [
+                "latexmk"
+            ]
+        },
+        {
+            "name": "pdflatex -> bibtex -> pdflatex*2",
+            "tools": [
+                "pdflatex",
+                "bibtex",
+                "pdflatex",
+                "pdflatex"
+            ]
+        }
+    ],
+    "latex-workshop.bibtex-format.tab": "2 spaces",
+    "latex-workshop.bibtex-format.case": "lowercase",
+    "latex-workshop.bibtex-format.handleDuplicates": "Highlight Duplicates",
+    "latex-workshop.bibtex-format.sortby": [
+        "date"
+    ],
+    "latex-workshop.bibtex-format.surround": "Curly braces",
+    // Python
+    "[python]": {
+        "editor.formatOnSave": true
+    },
+    "python.jediEnabled": false,
+    "python.linting.enabled": false,
+    "python.formatting.provider": "yapf",
+    "python.dataScience.enabled": false,
+    "python.workspaceSymbols.enabled": false,
+    "vsintellicode.python.completionsEnabled": false,
+    /* General Tools */
+    // Terminal
+    "terminal.integrated.env.linux": {
+        "DESTDIR": "/home/ahellwig/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/out/cmake"
+    },
+    "terminal.integrated.inheritEnv": true,
+    // Spell Checker
+    "cSpell.logLevel": "None",
+    "cSpell.ignorePaths": [
+        "**/package-lock.json",
+        "**/node_modules/**",
+        "**/vscode-extension/**",
+        "**/.git/objects/**",
+        ".vscode",
+        ".clang-format",
+        "Doxyfile",
+        "README.md"
+    ],
+    "cSpell.allowCompoundWords": true,
+    "cSpell.enabledFiletypes": [
+        "cpp",
+        "latex"
+    ],
+    "cSpell.words": [
+        "autoreconf",
+        "dndebug",
+        "frcc's",
+        "latexmk",
+        "wpragmas"
+    ],
+    /* Files */
+    "files.associations": {
+        "*.html": "html",
+        "*.txt": "cmake",
+        "*.in": "cpp",
+        "iostream": "cpp",
+        "cctype": "cpp",
+        "clocale": "cpp",
+        "cmath": "cpp",
+        "cstdarg": "cpp",
+        "cstddef": "cpp",
+        "cstdio": "cpp",
+        "cstdlib": "cpp",
+        "cstring": "cpp",
+        "ctime": "cpp",
+        "cwchar": "cpp",
+        "cwctype": "cpp",
+        "array": "cpp",
+        "atomic": "cpp",
+        "hash_map": "cpp",
+        "bit": "cpp",
+        "*.tcc": "cpp",
+        "bitset": "cpp",
+        "cfenv": "cpp",
+        "chrono": "cpp",
+        "codecvt": "cpp",
+        "complex": "cpp",
+        "condition_variable": "cpp",
+        "cstdint": "cpp",
+        "deque": "cpp",
+        "forward_list": "cpp",
+        "list": "cpp",
+        "map": "cpp",
+        "set": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "vector": "cpp",
+        "exception": "cpp",
+        "algorithm": "cpp",
+        "functional": "cpp",
+        "iterator": "cpp",
+        "memory": "cpp",
+        "memory_resource": "cpp",
+        "numeric": "cpp",
+        "optional": "cpp",
+        "random": "cpp",
+        "ratio": "cpp",
+        "regex": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "system_error": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "fstream": "cpp",
+        "future": "cpp",
+        "initializer_list": "cpp",
+        "iomanip": "cpp",
+        "iosfwd": "cpp",
+        "istream": "cpp",
+        "limits": "cpp",
+        "mutex": "cpp",
+        "new": "cpp",
+        "ostream": "cpp",
+        "shared_mutex": "cpp",
+        "sstream": "cpp",
+        "stdexcept": "cpp",
+        "streambuf": "cpp",
+        "thread": "cpp",
+        "cinttypes": "cpp",
+        "typeinfo": "cpp",
+        "valarray": "cpp",
+        "variant": "cpp",
+        "__bit_reference": "cpp",
+        "__config": "cpp",
+        "__debug": "cpp",
+        "__errc": "cpp",
+        "__functional_base": "cpp",
+        "__hash_table": "cpp",
+        "__locale": "cpp",
+        "__mutex_base": "cpp",
+        "__node_handle": "cpp",
+        "__nullptr": "cpp",
+        "__split_buffer": "cpp",
+        "__string": "cpp",
+        "__threading_support": "cpp",
+        "__tree": "cpp",
+        "__tuple": "cpp",
+        "compare": "cpp",
+        "ios": "cpp",
+        "locale": "cpp",
+        "queue": "cpp",
+        "stack": "cpp",
+        "typeindex": "cpp"
+    }
+}
