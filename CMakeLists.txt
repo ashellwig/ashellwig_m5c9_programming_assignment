@@ -1,6 +1,17 @@
-cmake_minimum_required(VERSION 3.5)
-
+cmake_minimum_required(VERSION 3.0.0)
 project(ashellwig_m5c9_programming_assignment LANGUAGES CXX VERSION 0.0.1)
+
+include(CTest)
+enable_testing()
+
+add_executable(ashellwig_m5c9_programming_assignment main.cpp)
+
+set(CPACK_PROJECT_NAME ${PROJECT_NAME})
+set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
+include(CPack)
+
+
+cmake_minimum_required(VERSION 3.5)
 
 # -- Variables ---
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
