@@ -35,12 +35,25 @@ function __get_catch2_version_remote() {
     | sed -E 's/.*"([^"]+)".*/\1/'
 }
 function __get_catch2_version_local() {
-  declare
+  awk -e \
+    '/^#define CATCH_VERSION.*/ { print $0 }' \
+    "${project_source_DIR}/include/catch2/catch.hpp" \
+    | sed -e 's/\<[a-zA-Z]\>//g' \
+    | awk '{ print $3 }' \
+    | paste -s -d '.'
 }
 
 function compare_catch2_versions() {
   declare catch2_local_version
+  catch2_local_version="$(__get_catch2_version_local)"
+
   declare catch2_remote_version
+  catch2_remote_version="$(__get_catch2_version_remote)"
+
+  if [[ "${catch2_local_version}" == "${catch2_remote_version}" ]]; then
+    __log_msg -s "Catch2 already up to date."
+    exit 0
+  fi
 }
 
 # BEGIN SCRIPT

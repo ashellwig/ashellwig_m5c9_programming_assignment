@@ -180,7 +180,7 @@
         ]
     },
     "shellformat.path": "/home/ahellwig/go/bin/shfmt",
-    "shellformat.flag": "-ln bash -i 2 -bn -ci -sr -kp",
+    "shellformat.flag": "-ln bash -i 2 -bn -ci -sr",
     "shellformat.effectLanguages": [
         "shellscript",
         "dotenv",
