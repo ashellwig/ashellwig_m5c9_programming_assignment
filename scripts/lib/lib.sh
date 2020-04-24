@@ -1,19 +1,4 @@
 #!/bin/bash
-
-################################################################################
-# Print warning/error messages to STDERR.
-################################################################################
-function eprintlog() {
-
-  if [[ "${1}" == "error" ]]; then
-    if [[ "${color_support}" -eq 1 ]]; then
-      echo "\033[0;31m[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $2\033[0m" >&2
-    else
-      echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $2" >&2
-    fi
-  fi
-}
-
 ################################################################################
 # Gets the path of the currently file this function is called in.
 # Returns:
@@ -23,6 +8,15 @@ function __SCRIPT_SRC_DIR__() {
   cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd
 }
 
+################################################################################
+# Prints a message to stderr or std in color if color support is provided.
+# Arguments:
+#   -i -> Informational message printed to stdout.
+#   -s -> Success message printed to stdout.
+#   -e -> Error message prined to stderr.
+# Outputs:
+#   A message to stdout if [-i | -s] is provided. Stderr if [-e].
+################################################################################
 function __log_msg() {
   # Declare options
   declare _opt_USE_COLOR
