@@ -360,4 +360,5 @@ missing
 *.log
 
 share/
-lib/
+/lib/
+!cmake/lib/Catch2

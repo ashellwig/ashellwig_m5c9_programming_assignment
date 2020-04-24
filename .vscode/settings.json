@@ -61,14 +61,14 @@
     "cmake.environment": {
         "DESTDIR": "/home/ahellwig/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/out/cmake"
     },
-    "cmake.configureArgs": [
-        "-DCMAKE_INSTALL_PREFIX=/home/ahellwig/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/out/cmake"
-    ],
     "cmake.cmakePath": "/usr/bin/cmake",
     "cmake.buildDirectory": "${workspaceFolder}/build",
     "cmake.emscriptenSearchDirs": [
         "/home/ahellwig/SDKs/emsdk"
     ],
+    "cmake.configureSettings": {
+        "CATCH2_INSTALL_PREFIX": "/home/ahellwig/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/cmake/lib/Catch2"
+    },
     "cmake.buildEnvironment": {
         "DESTDIR": "/home/ahellwig/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/out/cmake"
     },
@@ -173,7 +173,11 @@
     /* Shellscript */
     "[shellscript]": {
         "files.eol": "\n",
-        "editor.formatOnSave": true
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2,
+        "editor.rulers": [
+            80
+        ]
     },
     "shellformat.path": "/home/ahellwig/go/bin/shfmt",
     "shellformat.flag": "-ln bash -i 2 -bn -ci -sr -kp",
@@ -183,7 +187,19 @@
         "ignore",
         "gitignore"
     ],
-    "shellcheck.enable": false,
+    "shellcheck.enable": true,
+    "shellcheck.executablePath": "/home/ahellwig/.local/bin/shellcheck",
+    "shellcheck.customArgs": [
+        "--shell=bash",
+        "--severity=style"
+    ],
+    "shellcheck.run": "onSave",
+    "shellcheck.enableQuickFix": false,
+    "shellcheck.exclude": [],
+    "shellcheck.ignorePatterns": {
+        "**/*.zsh": true
+    },
+    "shellcheck.useWorkspaceRootAsCwd": true,
     /* General Tools */
     // Terminal
     "terminal.integrated.env.linux": {
@@ -203,7 +219,9 @@
         "!plaintext",
         "!restructuredtext",
         "!text",
-        "!yml"
+        "!yml",
+        "!json",
+        "!jsonc"
     ],
     "cSpell.logLevel": "None",
     "cSpell.ignorePaths": [
@@ -245,10 +263,16 @@
         "**/*.bbl": true,
     },
     "files.associations": {
+        // Data Files
+        "Ch9Ex2*.txt": "plaintext",
+        // Shell Scripts (Executable)
+        "/scripts/get_project_dir": "shellscript",
+        "/scripts/update_catch2": "shellscript",
+        // Misc
         "*.html": "html",
         "*.txt": "cmake",
+        // C++
         "*.in": "cpp",
-        "Ch9Ex2*.txt": "plaintext",
         "iostream": "cpp",
         "cctype": "cpp",
         "clocale": "cpp",
