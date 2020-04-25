@@ -14,16 +14,23 @@
 
 #include "../include/chapter9.hh"          // TBD
 #include "../include/general_functions.hh" // pauseprompt
-#include <iostream>                        // std::cout
-
+#include <fstream>
+#include <iostream> // std::cout
+#include <string>
 /**
  * @brief Performs the steps to execute the main application.
  */
 int main() {
 
-  // Generate our candidate data
-  chapter9::Candidate candidateList;
-  candidateList.printResult();
+  // Generate Student Data
+  chapter9::StudentType student(
+      std::ifstream(
+          "/home/ahellwig/Documents/School/CSC160/Module-5/"
+          "Programming-Assignments/"
+          "ashellwig_m5c9_programming_assignment/data/Ch9Ex2/Ch9Ex2Data.txt"),
+      1);
+
+  student.print(std::cout);
 
   // "Press enter to continue..."
   general_functions::pauseprompt();
