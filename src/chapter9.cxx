@@ -108,3 +108,8 @@ void chapter9::StudentType::setLetterGrade() {
     m_grade = 'F';
   }
 }
+
+void chapter9::StudentType::print(std::ostream &output) const {
+  output << std::left << getLastName() << ", " << getFirstName() << " "
+         << getTestScore() << " " << getLetterGrade();
+}

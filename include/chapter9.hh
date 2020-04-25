@@ -60,6 +60,7 @@ protected:
 struct StudentType : public StudentInterface {
   StudentType(std::ifstream &&, int); //*< Constructor.
   void setLetterGrade();
+  void print(std::ostream &) const;
 
 protected:
   std::ifstream m_inputFile; //*< Input file.
