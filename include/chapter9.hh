@@ -1,62 +1,70 @@
 /**
  * @file chapter9.hh
  * @author Ashton Scott Hellwig (ahellwig@student.cccs.edu)
- * @brief This file contains the prototypes used for
- * calculating the vote statistics of data input by the user.
- * @date 2020-04-22
+ *
+ * @brief This file contains the function implementations used for
+ * generating the student statistics based on input specified by the user.
  *
  * Assignment: Module 5 Chapter 9 Programming Assignment.
- * Description: This file contains the prototypes used for
- * calculating the vote statistics of data input by the user.
+ * Description: This file contains the function implementations used for
+ * generating the student statistics based on input specified by the user.
  * Instructor: Jeffrey Hemmes.
  * Course: [CSC 160] Introduction to Programming (C++).
- * Date: 22 April 2020.
+ *
+ * @date 2020-04-24
  */
-
-#ifndef _CHAPTER9_HH_INCLUDED
-#define _CHAPTER9_HH_INCLUDED
+#include "ashwig_exceptions.hh"
+#include <fstream>
+#include <iostream>
 #include <string>
 
-#ifndef NDEBUG
-#  define DEBUG 1
-#  include "ashwig_debug.hh"
-#else
-#  define DEBUG 0
-#endif
+#ifndef _CHAPTER9_HH_INCLUDED
+#  define _CHAPTER9_HH_INCLUDED
 
-#include "ashwig_exceptions.hh"
+#  ifndef NDEBUG
+#    define DEBUG 1
+#    include "ashwig_debug.hh"
+#  else
+#    define DEBUG 0
+#  endif
 
 namespace chapter9 {
 
-class Candidate {
-public:
-  // Static constants
-  static const int m_numberOfCandidates =
-      5; //*< Number of candidates in election.
+struct StudentInterface {
+  StudentInterface();                              //*< Constructor.
+  StudentInterface(std::string, std::string, int); //*< Constructor.
+  virtual ~StudentInterface() = 0;                 //*< Destructor.
 
-  // Constructors
-  Candidate(); //*< Construct class with user input via std::cin.
-  explicit Candidate(
-      std::string); //*< Construct class with one string(for testing).
+  // Pure Virtual Functions
+  virtual void print(std::ostream &) const = 0; //*< Print function.
+  virtual void setLetterGrade() = 0;
 
   // Setters
-  void setTotalVotes(int[]);
-  int calculatePercentOfVotes();
+  void setFirstName(std::string);
+  void setLastName(std::string);
+  void setTestScore(int);
+
   // Getters
-  int getTotalVotes() const;
-  int getWinnerIndex() const;
-  void getUserInput(std::string[], int[]);
-  // Printers
-  void printResult() const;
+  std::string getFirstName() const;
+  std::string getLastName() const;
+  int getTestScore() const;
+  char getLetterGrade() const;
 
 protected:
-  std::string m_names[m_numberOfCandidates]; //*< Last names of candidates.
-  int m_votes[m_numberOfCandidates]; //*< Number of votes for each candidate.
-  double m_percentOfVotes[m_numberOfCandidates]; //*< Percentage of total votes
-                                                 //*< for each candidate.
-  int m_totalVotes; //*< Total votes across all candidates.
-  // clang-format disable
-}; // class Candidate
-// clang-format enable
+  std::string m_studentFName; //*< Student's first name.
+  std::string m_studentLName; //*< Student's last Name.
+  int m_testScore;            //*< Student's test score.
+  char m_grade;               //*< Student's letter grade.
+};
+
+struct StudentType : public StudentInterface {
+  StudentType(std::ifstream &&, int); //*< Constructor.
+  void setLetterGrade();
+
+protected:
+  std::ifstream m_inputFile; //*< Input file.
+  std::string m_inputString; //*< Extracted string from `inputFile`.
+};
 } // namespace chapter9
-#endif // !CHAPTER9_HH_INCLUDED
+
+#endif

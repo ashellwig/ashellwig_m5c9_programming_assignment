@@ -1,144 +1,110 @@
 /**
  * @file chapter9.cxx
  * @author Ashton Scott Hellwig (ahellwig@student.cccs.edu)
+ *
  * @brief This file contains the function implementations used for
- * calculating the vote statistics of data input by the user.
- * @date 2020-04-22
+ * generating the student statistics based on input specified by the user.
  *
  * Assignment: Module 5 Chapter 9 Programming Assignment.
  * Description: This file contains the function implementations used for
- * calculating the vote statistics of data input by the user.
+ * generating the student statistics based on input specified by the user.
  * Instructor: Jeffrey Hemmes.
  * Course: [CSC 160] Introduction to Programming (C++).
- * Date: 21 April 2020.
+ *
+ * @date 2020-04-24
  */
 
 #include "../include/chapter9.hh"
-#include <iomanip>  //std::setw, std::setprecision
-#include <iostream> // std::cin, std::cout
-#include <sstream>  // std::stringstream
-#include <string>   // std::string
+#include <fstream>
+#include <iomanip>
+#include <iostream>
+#include <sstream>
+#include <string>
 
-/**
- * @brief Construct a new chapter9::Candidate::Candidate object
- */
-chapter9::Candidate::Candidate() {
-  // Prompt user for input to initialize our parallel arrays.
-  getUserInput(m_names, m_votes);
-
-  // Calculate number of total votes (sum of votes for all candidates).
-  for (int iter = 0; iter < m_numberOfCandidates; iter++) {
-    m_totalVotes += m_votes[iter];
-  }
-
-  // Calculate the percentage of total votes received by each candidate and
-  // store the value in a separate array.
-  for (int iter = 0; iter < m_numberOfCandidates; iter++) {
-    m_percentOfVotes[iter] =
-        100.00 * (m_votes[iter] / static_cast<double>(m_totalVotes));
-  }
+// BASE CLASS
+chapter9::StudentInterface::StudentInterface(std::string firstName,
+                                             std::string lastName,
+                                             int testScore) {
+  setFirstName(firstName);
+  setLastName(lastName);
+  setTestScore(testScore);
 }
 
-/**
- * @brief Construct a new chapter9::Candidate::Candidate object
- *
- * @param inputString The last names and number of votes for each candidates in
- * one string.
- */
-chapter9::Candidate::Candidate(std::string inputString) {
-  std::stringstream userInputStream(inputString);
-
-  // Initialize Arrays
-  for (int iter = 0; iter < m_numberOfCandidates; iter++) {
-    userInputStream >> m_names[iter] >> m_votes[iter];
-  }
-
-  // Calculate number of total votes (sum of votes for all candidates).
-  for (int iter = 0; iter < m_numberOfCandidates; iter++) {
-    m_totalVotes += m_votes[iter];
-  }
-
-  // Calculate the percentage of total votes received by each candidate and
-  // store the value in a separate array.
-  for (int iter = 0; iter < m_numberOfCandidates; iter++) {
-    m_percentOfVotes[iter] = m_votes[iter] / static_cast<double>(m_totalVotes);
-  }
+void chapter9::StudentInterface::setFirstName(std::string firstName) {
+  m_studentFName = firstName;
 }
 
-/**
- * @brief Sets the Candidate class's private member variables using input
- * obtained via stdin.
- *
- * @param names The last names of the candidates in the election.
- * @param votes The number of votes received by the candidate.
- */
-void chapter9::Candidate::getUserInput(std::string names[], int votes[]) {
-  // Prompt User
-  std::cout
-      << "Enter candidate's last name and the votes received by the candidate."
-      << std::endl;
-
-  // Initialize our arrays
-  for (int iter = 0; iter < m_numberOfCandidates; iter++) {
-    std::cin >> names[iter] >> votes[iter];
-  }
+void chapter9::StudentInterface::setLastName(std::string lastName) {
+  m_studentLName = lastName;
 }
 
-/**
- * @brief Calculates the sum of votes received by all candidates.
- *
- * @return int The sum of votes received by all candidates.
- */
-int chapter9::Candidate::getTotalVotes() const { return m_totalVotes; }
+void chapter9::StudentInterface::setTestScore(int testScore) {
+  m_testScore = testScore;
+}
 
-/**
- * @brief Returns the index of the candidate with the most votes.
- *
- * @return int The index of the candidate with the most votes.
- */
-int chapter9::Candidate::getWinnerIndex() const {
-  int mostVotes = 0; //*< The number of votes received by the winning candidate.
-  int index = 0;     //*< Index of array.
-  int lcv = sizeof(m_votes) / sizeof(m_votes[0]); //*< Loop Control Variable.
+std::string chapter9::StudentInterface::getFirstName() const {
+  return m_studentFName;
+}
 
-  for (int i = 0; i < lcv; i++) {
-    if (m_votes[i] > mostVotes) {
-      mostVotes = m_votes[i];
-      index = i;
+std::string chapter9::StudentInterface::getLastName() const {
+  return m_studentLName;
+}
+
+int chapter9::StudentInterface::getTestScore() const { return m_testScore; }
+
+// END BASE CLASS
+
+chapter9::StudentType::StudentType(std::ifstream &&file, int lineNo = 0)
+    : m_inputFile(std::move(file)) {
+  int totalLines;
+  std::string line;
+
+  while (!file.eof()) {
+    std::getline(file, line);
+    totalLines++;
+  }
+
+  std::istringstream input;
+
+  std::string inputLine;
+  std::string firstName;
+  std::string lastName;
+  int testScore;
+  int currentLine = 0;
+
+  while (!file.eof()) {
+    std::getline(file, inputLine);
+    if (currentLine == lineNo) {
+      file >> firstName >> lastName >> testScore;
     }
+    currentLine++;
   }
 
-  return index;
+  file.close();
+
+  m_studentFName = firstName;
+  m_studentLName = lastName;
+  m_testScore = testScore;
+  setLetterGrade();
 }
 
-/**
- * @brief Generates the desired output for the Chapter 9 Programming Assignment.
- */
-void chapter9::Candidate::printResult() const {
-  // Set local variables.
-  int lcv = sizeof(m_votes) / sizeof(m_votes[0]); //*< Loop control variable.
+void chapter9::StudentType::setLetterGrade() {
+  if (m_testScore > 89)
+    m_grade = 'A';
 
-  // Output formatted header
-  std::cout << std::setprecision(3) << std::fixed;
-  std::cout << "Candidate" << std::setw(4) << " "
-            << "Votes Received" << std::setw(4) << " "
-            << "\% of Total Votes" << std::endl;
-
-  // Loop which prints the election results based on our user's input.
-  for (int i = 0; i < lcv; i++) {
-    std::cout << std::fixed << std::setprecision(2) << std::left;
-    std::cout << std::setw(16) << m_names[i] << std::setw(23) << m_votes[i]
-              << m_percentOfVotes[i] << '\n';
+  if ((m_testScore <= 89) && (m_testScore > 79)) {
+    m_grade = 'B';
   }
 
-  // Find our election winner.
-  int indexOfWinner = getWinnerIndex();
+  if ((m_testScore <= 79) && (m_testScore > 69)) {
+    m_grade = 'C';
+  }
 
-  // Output total number of votes received by ALL candidates.
-  std::cout << "Total"
-            << " " << std::setw(15) << m_totalVotes << std::endl;
+  if ((m_testScore <= 69) && (m_testScore > 59)) {
+    m_grade = 'D';
+  }
 
-  // Output winner of election.
-  std::cout << "The winner of the election is " << m_names[indexOfWinner] << "."
-            << std::endl;
+  if (m_testScore <= 59) {
+    m_grade = 'F';
+  }
 }

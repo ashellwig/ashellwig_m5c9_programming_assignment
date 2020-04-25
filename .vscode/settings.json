@@ -66,9 +66,9 @@
     "cmake.emscriptenSearchDirs": [
         "/home/ahellwig/SDKs/emsdk"
     ],
-    "cmake.configureSettings": {
-        "CATCH2_INSTALL_PREFIX": "/home/ahellwig/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/cmake/lib/Catch2"
-    },
+    // "cmake.configureSettings": {
+    //     "CATCH2_INSTALL_PREFIX": "/home/ahellwig/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/cmake/lib/Catch2"
+    // },
     "cmake.buildEnvironment": {
         "DESTDIR": "/home/ahellwig/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/out/cmake"
     },

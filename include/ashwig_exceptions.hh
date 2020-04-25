@@ -18,14 +18,10 @@
 
 #include <exception>
 
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wpragmas"
-#pragma GCC diagnostic ignored "-Wc++17-extensions"
-inline namespace ashwig_exceptions {
+namespace ashwig_exceptions {
 /**
  * @brief Provides exception types for additional debugging information.
  */
-inline namespace exceptions {
 class Chapter6InputException : public std::exception {
 public:
   virtual const char *what() const throw() {
@@ -40,8 +36,6 @@ public:
            "[LastName] [000-00-000] [S0000000] [password]";
   }
 };
-} // namespace exceptions
 } // namespace ashwig_exceptions
-#pragma GCC diagnostic pop
 
 #endif // !ASHWIG_EXCEPTIONS_HH
