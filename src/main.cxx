@@ -23,14 +23,14 @@
 int main() {
 
   // Generate Student Data
-  const char *fileName = "/home/ahellwig/Documents/School/CSC160/Module-5/"
-                         "Programming-Assignments/"
-                         "ashellwig_m5c9_programming_assignment/data/Ch9Ex2/"
-                         "Ch9Ex2Data.txt";
+  char fileName[] = "/home/ahellwig/Documents/School/CSC160/Module-5/"
+                    "Programming-Assignments/"
+                    "ashellwig_m5c9_programming_assignment/data/Ch9Ex2/"
+                    "Ch9Ex2Data.txt";
 
-  chapter9::StudentType student(fileName, 1);
+  chapter9::StudentType student(fileName, 0);
 
-  student.print(std::cout);
+  student.print();
 
   // "Press enter to continue..."
   general_functions::pauseprompt();

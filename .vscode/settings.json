@@ -58,6 +58,7 @@
         "editor.defaultFormatter": "ms-vscode.cmake-tools",
         "editor.tabSize": 2
     },
+    "cmake.generator": "Unix Makefiles",
     "cmake.environment": {
         "DESTDIR": "/home/ahellwig/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/out/cmake"
     },

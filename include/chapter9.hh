@@ -33,7 +33,7 @@ namespace chapter9 {
 struct StudentType {
   StudentType(const char *, int); //*< Constructor.
   // Print Functions
-  void print(std::ostream &) const; //*< Print function.
+  void print() const; //*< Print function.
 
   // Setters
   void setFirstName(std::string);

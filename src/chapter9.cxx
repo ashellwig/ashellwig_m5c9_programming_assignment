@@ -100,7 +100,7 @@ void chapter9::StudentType::setLetterGrade(int score) {
   }
 }
 
-void chapter9::StudentType::print(std::ostream &output) const {
-  output << std::left << m_studentFName << ", " << getFirstName() << " "
-         << getTestScore() << " " << getLetterGrade();
+void chapter9::StudentType::print() const {
+  std::cout << this->m_studentFName << ", " << this->m_studentLName << " "
+            << this->m_testScore << " " << this->m_grade << std::endl;
 }
