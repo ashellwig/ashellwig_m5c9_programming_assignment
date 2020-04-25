@@ -21,46 +21,37 @@
 #include <sstream>
 #include <string>
 
-// BASE CLASS
-chapter9::StudentInterface::StudentInterface(std::string firstName,
-                                             std::string lastName,
-                                             int testScore) {
-  setFirstName(firstName);
-  setLastName(lastName);
-  setTestScore(testScore);
-}
-
-void chapter9::StudentInterface::setFirstName(std::string firstName) {
+void chapter9::StudentType::setFirstName(std::string firstName) {
   m_studentFName = firstName;
 }
 
-void chapter9::StudentInterface::setLastName(std::string lastName) {
+void chapter9::StudentType::setLastName(std::string lastName) {
   m_studentLName = lastName;
 }
 
-void chapter9::StudentInterface::setTestScore(int testScore) {
+void chapter9::StudentType::setTestScore(int testScore) {
   m_testScore = testScore;
 }
 
-std::string chapter9::StudentInterface::getFirstName() const {
+std::string chapter9::StudentType::getFirstName() const {
   return m_studentFName;
 }
 
-std::string chapter9::StudentInterface::getLastName() const {
+std::string chapter9::StudentType::getLastName() const {
   return m_studentLName;
 }
 
-int chapter9::StudentInterface::getTestScore() const { return m_testScore; }
+int chapter9::StudentType::getTestScore() const { return m_testScore; }
 
-// END BASE CLASS
+char chapter9::StudentType::getLetterGrade() const { return m_grade; }
 
-chapter9::StudentType::StudentType(std::ifstream &&file, int lineNo = 0)
-    : m_inputFile(std::move(file)) {
+chapter9::StudentType::StudentType(const char *fileName, int lineNo = 0)
+    : m_file(fileName) {
   int totalLines;
   std::string line;
 
-  while (!file.eof()) {
-    std::getline(file, line);
+  while (!m_file.eof()) {
+    std::getline(m_file, line);
     totalLines++;
   }
 
@@ -72,44 +63,44 @@ chapter9::StudentType::StudentType(std::ifstream &&file, int lineNo = 0)
   int testScore;
   int currentLine = 0;
 
-  while (!file.eof()) {
-    std::getline(file, inputLine);
+  while (!m_file.eof()) {
+    std::getline(m_file, inputLine);
     if (currentLine == lineNo) {
-      file >> firstName >> lastName >> testScore;
+      m_file >> firstName >> lastName >> testScore;
     }
     currentLine++;
   }
 
-  file.close();
+  m_file.close();
 
   m_studentFName = firstName;
   m_studentLName = lastName;
   m_testScore = testScore;
-  setLetterGrade();
+  setLetterGrade(testScore);
 }
 
-void chapter9::StudentType::setLetterGrade() {
-  if (m_testScore > 89)
+void chapter9::StudentType::setLetterGrade(int score) {
+  if (score > 89)
     m_grade = 'A';
 
-  if ((m_testScore <= 89) && (m_testScore > 79)) {
+  if ((score <= 89) && (score > 79)) {
     m_grade = 'B';
   }
 
-  if ((m_testScore <= 79) && (m_testScore > 69)) {
+  if ((score <= 79) && (score > 69)) {
     m_grade = 'C';
   }
 
-  if ((m_testScore <= 69) && (m_testScore > 59)) {
+  if ((score <= 69) && (score > 59)) {
     m_grade = 'D';
   }
 
-  if (m_testScore <= 59) {
+  if (score <= 59) {
     m_grade = 'F';
   }
 }
 
 void chapter9::StudentType::print(std::ostream &output) const {
-  output << std::left << getLastName() << ", " << getFirstName() << " "
+  output << std::left << m_studentFName << ", " << getFirstName() << " "
          << getTestScore() << " " << getLetterGrade();
 }

@@ -30,19 +30,16 @@
 
 namespace chapter9 {
 
-struct StudentInterface {
-  StudentInterface();                              //*< Constructor.
-  StudentInterface(std::string, std::string, int); //*< Constructor.
-  virtual ~StudentInterface() = 0;                 //*< Destructor.
-
-  // Pure Virtual Functions
-  virtual void print(std::ostream &) const = 0; //*< Print function.
-  virtual void setLetterGrade() = 0;
+struct StudentType {
+  StudentType(const char *, int); //*< Constructor.
+  // Print Functions
+  void print(std::ostream &) const; //*< Print function.
 
   // Setters
   void setFirstName(std::string);
   void setLastName(std::string);
   void setTestScore(int);
+  void setLetterGrade(int);
 
   // Getters
   std::string getFirstName() const;
@@ -50,22 +47,13 @@ struct StudentInterface {
   int getTestScore() const;
   char getLetterGrade() const;
 
-protected:
+private:
+  std::ifstream m_file;       //*< User's input file.
   std::string m_studentFName; //*< Student's first name.
   std::string m_studentLName; //*< Student's last Name.
   int m_testScore;            //*< Student's test score.
   char m_grade;               //*< Student's letter grade.
-};
-
-struct StudentType : public StudentInterface {
-  StudentType(std::ifstream &&, int); //*< Constructor.
-  void setLetterGrade();
-  void print(std::ostream &) const;
-
-protected:
-  std::ifstream m_inputFile; //*< Input file.
-  std::string m_inputString; //*< Extracted string from `inputFile`.
-};
+};                            // namespace StudentType
 } // namespace chapter9
 
 #endif

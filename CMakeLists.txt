@@ -14,29 +14,28 @@ cmake_minimum_required(VERSION 3.5)
 # -- Variables ---
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/UninstallTarget")
-list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/lib/Catch2")
+set(CMAKE_PREFIX_PATH "${CMAKE_PREFIX_PATH}:${CMAKE_CURRENT_SOURCE_DIR}/cmake/lib/Catch2")
 
 # --- Project Executable Target ---
 set(SRC_FILES
   ${PROJECT_SOURCE_DIR}/src/chapter9.cxx
   ${PROJECT_SOURCE_DIR}/src/general_functions.cxx
   ${PROJECT_SOURCE_DIR}/src/main.cxx
-  )
-if("$BUILD_TESTING")
-  list(APPEND ${SRC_FILES}
-    ${PROJECT_SOURCE_DIR}/test/catch_main.cxx
-    ${PROJECT_SOURCE_DIR}/test/TestCase.cxx)
-endif("$BUILD_TESTING")
+  # ${PROJECT_SOURCE_DIR}/test/catch_main.cxx
+  # ${PROJECT_SOURCE_DIR}/test/TestCase.cxx
+)
 
-add_executable(ashellwig_m5c9_programming_assignment ${SRC_FILES})
-target_include_directories(ashellwig_m5c9_programming_assignment
-  PUBLIC "${CMAKE_SOURCE_DIR}/include")
-target_include_directories(ashellwig_m5c9_programming_assignment SYSTEM
-  PUBLIC "${CMAKE_SOURCE_DIR}/include/catch2")
-find_package(Catch2 REQUIRED)
-target_link_libraries(ashellwig_m5c9_programming_assignment Catch2::Catch2)
-include(CTest)
-enable_testing()
+
+# set(Catch2_DIR "/home/ahellwig/Documents/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/cmake/Catch2")
+# find_package(Catch2 REQUIRED)
+# include(CTest)
+# enable_testing()
+# set(CATCH_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include/catch2")
+# find_path(CATCH_INCLUDE_DIR "catch.hpp")
+include_directories( ${INCLUDE_DIRECTORIES} "${PROJECT_SOURCE_DIR}/include" "${PROJECT_SOURCE_DIR}/include/catch2")
+add_executable(${PROJECT_NAME} ${SRC_FILES})
+# include(ParseAndAddCatchTests)
+# ParseAndAddCatchTests(${PROJECT_NAME})
 
 
 
@@ -46,7 +45,7 @@ if (NOT TARGET uninstall)
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake/UninstallTarget/cmake_uninstall.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
     IMMEDIATE @ONLY)
-  
+
   add_custom_target(uninstall
   COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
 endif()

@@ -201,11 +201,11 @@
     },
     "shellcheck.useWorkspaceRootAsCwd": true,
     /* General Tools */
-    // Terminal
-    "terminal.integrated.env.linux": {
-        "DESTDIR": "/home/ahellwig/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/out/cmake"
-    },
-    "terminal.integrated.inheritEnv": true,
+    // // Terminal
+    // "terminal.integrated.env.linux": {
+    //     "DESTDIR": "/home/ahellwig/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/out/cmake"
+    // },
+    "terminal.integrated.inheritEnv": false,
     // Spell Checker
     "cSpell.enableFiletypes": [
         "!yaml",

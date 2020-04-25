@@ -23,12 +23,12 @@
 int main() {
 
   // Generate Student Data
-  chapter9::StudentType student(
-      std::ifstream(
-          "/home/ahellwig/Documents/School/CSC160/Module-5/"
-          "Programming-Assignments/"
-          "ashellwig_m5c9_programming_assignment/data/Ch9Ex2/Ch9Ex2Data.txt"),
-      1);
+  const char *fileName = "/home/ahellwig/Documents/School/CSC160/Module-5/"
+                         "Programming-Assignments/"
+                         "ashellwig_m5c9_programming_assignment/data/Ch9Ex2/"
+                         "Ch9Ex2Data.txt";
+
+  chapter9::StudentType student(fileName, 1);
 
   student.print(std::cout);
 
