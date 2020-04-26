@@ -9,8 +9,8 @@
 
 # --- Variables ---
 PROGRAM := out/bin/ashellwig_m5c9_programming_assignment.bin
-CXX := /usr/bin/g++
-DOXYGEN := /usr/bin/doxygen
+CXX := /bin/g++
+DOXYGEN := /bin/doxygen
 RM := /bin/rm
 mv := /bin/mv
 
