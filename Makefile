@@ -21,14 +21,14 @@ INCLUDES := include
 OBJS := $(addprefix out/obj/, $(notdir $(SRC:.cxx=.o)))
 CXXFLAGS := \
 	-c \
-	-std=gnu++2a \
+	-std=c++2a \
 	-Wall \
 	-Wextra \
 	-g \
 	-ggdb \
 	-DDEBUG=1
 LFLAGS := \
-	-std=gnu++2a \
+	-std=c++2a \
 	-ggdb \
 	-DDEBUG=1
 
@@ -39,7 +39,7 @@ TEST_INCLUDES := -Iinclude -Itest/include -isystem include/catch2
 TEST_OBJS := $(addprefix out/obj/test/, $(notdir $(TEST_SRC:.cxx=.o)))
 TEST_OBJS += out/obj/test/chapter9.o
 TEST_CXXFLAGS := \
-	-std=c++11 \
+	-std=c++17 \
 	-g \
 	-ggdb
 TEST_LFLAGS := -std=c++17
