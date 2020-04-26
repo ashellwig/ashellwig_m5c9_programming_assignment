@@ -80,7 +80,7 @@ fi
 if [[ -d "${project_source_DIR}/build" ]]; then
   rm -r "${project_source_DIR}/build"
 fi
-mkdir -p "${project_source_DIR}/build"e
+mkdir -p "${project_source_DIR}/build"
 
 cmake '-Bbuild' '-H.' \
   "-DCMAKE_INSTALL_PREFIX=${project_source_DIR}" \
@@ -89,6 +89,7 @@ cmake '-Bbuild' '-H.' \
   '-DCATCH_BUILD_TESTING=OFF' \
   '-DCATCH_INSTALL_DOCS=OFF' \
   '-DCATCH_INSTALL_HELPERS=on'
+export DEST_DIR="${project_source_DIR}"
 cmake --build build/ --target install
 
 if [[ -d "${project_source_DIR}/cmake/Catch2" ]]; then
@@ -96,7 +97,7 @@ if [[ -d "${project_source_DIR}/cmake/Catch2" ]]; then
 fi
 
 mkdir "${project_source_DIR}/cmake/Catch2"
-cp -R "${project_source_DIR}"/lib/cmake/Catch2 "${project_source_DIR}"/cmake/Catch2
+cp -v -r "$project_source_DIR/lib/cmake/Catch2" "$project_source_DIR/cmake/Catch2"
 
 declare delete_this_config_string
 delete_this_config_string='\"\$\{CMAKE_CURRENT_LIST_DIR\}\/..\/..\/..\/\"'
