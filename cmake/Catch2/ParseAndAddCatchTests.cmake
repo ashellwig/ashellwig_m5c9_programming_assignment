@@ -19,8 +19,8 @@
 #                                                                                                  #
 #        find_path(CATCH_INCLUDE_DIR "catch.hpp")                                                  #
 #        include_directories(${INCLUDE_DIRECTORIES} ${CATCH_INCLUDE_DIR})                          #
-#include(ParseAndAddCatchTests)                                                            #
-#        ParseAndAddCatchTests(${PROJECT_NAME})                        
+#        include(ParseAndAddCatchTests)                                                            #
+#        ParseAndAddCatchTests(${PROJECT_NAME})                                                    #
 #        file(GLOB SOURCE_FILES "*.cpp")                                                           #
 #        add_executable(${PROJECT_NAME} ${SOURCE_FILES})                                           #
 #                                                                                                  #

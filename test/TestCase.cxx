@@ -1,7 +1,7 @@
 #include "../include/catch2/catch.hpp"
 #include "../include/chapter9.hh"
 
-TEST_CASE("Example", "[example]") {
+SCENARIO("Example", "[example]") {
   GIVEN("An example") {
     WHEN("We use it") {
       THEN("Our tests pass!") { REQUIRE(1 == 1); }

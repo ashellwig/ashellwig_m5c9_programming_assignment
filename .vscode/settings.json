@@ -23,7 +23,11 @@
     "[cpp]": {
         "editor.defaultFormatter": "xaver.clang-format",
         "editor.tabSize": 2,
-        "editor.insertSpaces": true
+        "editor.insertSpaces": true,
+        "editor.codeActionsOnSave": {
+            "source.fixAll": true,
+            "source.organizeImports": true
+        }
     },
     "C_Cpp.clang_format_style": "file",
     "C_Cpp.clang_format_fallbackStyle": "LLVM",
@@ -67,15 +71,13 @@
     "cmake.emscriptenSearchDirs": [
         "/home/ahellwig/SDKs/emsdk"
     ],
-    // "cmake.configureSettings": {
-    //     "CATCH2_INSTALL_PREFIX": "/home/ahellwig/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/cmake/lib/Catch2"
-    // },
     "cmake.buildEnvironment": {
         "DESTDIR": "/home/ahellwig/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/out/cmake"
     },
     "cmake.configureEnvironment": {
         "DESTDIR": "/home/ahellwig/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/out/cmake"
     },
+    "terminal.integrated.inheritEnv": true,
     // Doxygen
     "doxdocgen.generic.briefTemplate": "@brief {text} ",
     "doxdocgen.generic.paramTemplate": "@param {param} ",
@@ -202,11 +204,11 @@
     },
     "shellcheck.useWorkspaceRootAsCwd": true,
     /* General Tools */
-    // // Terminal
-    // "terminal.integrated.env.linux": {
-    //     "DESTDIR": "/home/ahellwig/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/out/cmake"
-    // },
-    "terminal.integrated.inheritEnv": false,
+    // Terminal
+    "terminal.integrated.env.linux": {
+        "DESTDIR": "/home/ahellwig/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/out/cmake"
+    },
+    // "terminal.integrated.inheritEnv": false,
     // Spell Checker
     "cSpell.enableFiletypes": [
         "!yaml",
@@ -269,9 +271,12 @@
         // Shell Scripts (Executable)
         "/scripts/get_project_dir": "shellscript",
         "/scripts/update_catch2": "shellscript",
+        // Cmake
+        "*.txt": "cmake",
+        "*.cmake.*": "cmake",
+        "*.cmake": "cmake",
         // Misc
         "*.html": "html",
-        "*.txt": "cmake",
         // C++
         "*.in": "cpp",
         "iostream": "cpp",
