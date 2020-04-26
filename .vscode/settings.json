@@ -194,7 +194,9 @@
     "shellcheck.executablePath": "/home/ahellwig/.local/bin/shellcheck",
     "shellcheck.customArgs": [
         "--shell=bash",
-        "--severity=style"
+        "--severity=style",
+        "--source-path=scripts/lib/lib.sh",
+        "-x"
     ],
     "shellcheck.run": "onSave",
     "shellcheck.enableQuickFix": false,

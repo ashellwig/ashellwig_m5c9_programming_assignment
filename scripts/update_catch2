@@ -11,6 +11,8 @@ prev_DIR="${PWD}"
 
 declare -g update_catch2_DIR
 update_catch2_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+# shellcheck source=scripts/lib/lib.sh
+. "${update_catch2_DIR}/lib/lib.sh"
 
 declare -g project_source_DIR
 project_source_DIR="$(dirname "${update_catch2_DIR}")"
@@ -75,6 +77,11 @@ if [[ -d "${project_source_DIR}/include/catch2" ]]; then
   rm -r "${project_source_DIR}/include/catch2"
 fi
 
+if [[ -d "${project_source_DIR}/build" ]]; then
+  rm -r "${project_source_DIR}/build"
+fi
+mkdir -p "${project_source_DIR}/build"e
+
 cmake '-Bbuild' '-H.' \
   "-DCMAKE_INSTALL_PREFIX=${project_source_DIR}" \
   '-DBUILD_TESTING=OFF' \
@@ -85,14 +92,11 @@ cmake '-Bbuild' '-H.' \
 cmake --build build/ --target install
 
 if [[ -d "${project_source_DIR}/cmake/Catch2" ]]; then
-  rm -r "${project_source_DIR}/cmake/Catch2/"
+  rm -r "${project_source_DIR}/cmake/Catch2"
 fi
-# END SCRIPT
 
 mkdir "${project_source_DIR}/cmake/Catch2"
-
-mv "${project_source_DIR}"/lib/cmake/Catch2/* \
-  "${project_source_DIR}"/cmake/Catch2
+cp -R "${project_source_DIR}"/lib/cmake/Catch2 "${project_source_DIR}"/cmake/Catch2
 
 declare delete_this_config_string
 delete_this_config_string='\"\$\{CMAKE_CURRENT_LIST_DIR\}\/..\/..\/..\/\"'
@@ -106,8 +110,9 @@ sed -i \
 
 declare count
 count=0
-for ((i = 1; i < $count + 1; i++)); do
-  sed -i "/${delete_this_target_line}q;p"
+for ((i = 1; i < count + 1; i++)); do
+  sed -n "/${delete_this_target_line}/q;p" \
+    "${project_source_DIR}/cmake/Catch2/Catch2Targets.cmake"
 done
 
 rm -rf "${project_source_DIR:?}/lib"
