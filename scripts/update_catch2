@@ -94,6 +94,22 @@ mkdir "${project_source_DIR}/cmake/Catch2"
 mv "${project_source_DIR}"/lib/cmake/Catch2/* \
   "${project_source_DIR}"/cmake/Catch2
 
+declare delete_this_config_string
+delete_this_config_string='\"\$\{CMAKE_CURRENT_LIST_DIR\}\/..\/..\/..\/\"'
+use_this_config_string='\"\$\{CMAKE_CURRENT_LIST_DIR\}\/..\/..\/\"'
+declare delete_this_target_line
+delete_this_target_line='get_filename_component(_IMPORT_PREFIX \"\$\{_IMPORT_PREFIX\}\" PATH\)'
+
+sed -i \
+  "s/${delete_this_config_string}/${use_this_config_string}/g" \
+  "${project_source_DIR}/cmake/Catch2/Catch2Config.cmake"
+
+declare count
+count=0
+for ((i = 1; i < $count + 1; i++)); do
+  sed -i "/${delete_this_target_line}q;p"
+done
+
 rm -rf "${project_source_DIR:?}/lib"
 rm -rf "${project_source_DIR:?}/share"
 
