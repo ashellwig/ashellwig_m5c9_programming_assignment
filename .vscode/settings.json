@@ -265,6 +265,11 @@
         "latexmk",
         "wpragmas"
     ],
+    /* License */
+    "licenser.author": "Ashton Hellwig",
+    "licenser.license": "LGPLv3",
+    "licenser.projectName": "ashellwig_m5c9_programming_assignment",
+    "licenser.disableAutoHeaderInsertion": true,
     /* Files */
     "files.exclude": {
         ".tidyall.d": true,

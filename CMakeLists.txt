@@ -11,10 +11,10 @@ set(CPACK_SOURCE_GENERATOR "TGZ;ZIP")
 include(CPack)
 ## CMAKE SETTINGS
 set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/out/cmake")
-set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}:${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
+set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}:${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/UninstallTarget:${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/UseLatexMk")
 ## COMPILER SETTINGS
 set(CMAKE_CXX_FLAGS "-Wall -std=c++2a -Iinclude -isystem /usr/local/include/catch2")
-set(CMAKE_CXX_FLAGS_DEBUG "-Wall -std=c++2a -Iinclude -isystem /usr/local/include/catch2")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -g -ggdb")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O2 -DNDEBUG")
 set(SRC_FILES
   ${CMAKE_CURRENT_SOURCE_DIR}/src/chapter9.cxx
