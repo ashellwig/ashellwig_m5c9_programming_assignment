@@ -1,0 +1,6 @@
+run_test() {
+  cd build || exit 2
+  cmake .. -G "Unix Makefiles"
+  cmake --build . --target ashwig_test
+  cmake --build . --target test
+}

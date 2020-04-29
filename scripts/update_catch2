@@ -6,9 +6,6 @@ set -o pipefail
 set -o nounset
 
 ## Variables
-declare -g prev_DIR
-prev_DIR="${PWD}"
-
 declare -g update_catch2_DIR
 update_catch2_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 # shellcheck source=scripts/lib/lib.sh
@@ -17,8 +14,25 @@ update_catch2_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 declare -g project_source_DIR
 project_source_DIR="$(dirname "${update_catch2_DIR}")"
 
-declare -g temp_DIR
-temp_DIR="$(dirname "${project_source_DIR}")/tmp"
+declare -a -g install_dirs
+install_dirs=(
+  '/usr/local/lib/cmake/Catch2/Catch2Targets.cmake'
+  '/usr/local/include/catch2/catch_reporter_automake.hpp'
+  '/usr/local/include/catch2/catch.hpp'
+  '/usr/local/include/catch2/catch_reporter_tap.hpp'
+  '/usr/local/include/catch2/catch_reporter_teamcity.hpp'
+  '/usr/local/include/catch2/catch_reporter_sonarqube.hpp'
+  '/usr/local/lib/cmake/Catch2/Catch2Config.cmake'
+  '/usr/local/lib/cmake/Catch2/Catch2ConfigVersion.cmake'
+  '/usr/local/lib/cmake/Catch2/ParseAndAddCatchTests.cmake'
+  '/usr/local/lib/cmake/Catch2/Catch.cmake'
+  '/usr/local/lib/cmake/Catch2/CatchAddTests.cmake'
+  '/usr/local/share/Catch2/gdbinit'
+  '/usr/local/share/Catch2/lldbinit'
+  '/usr/local/share/pkgconfig/catch2.pc'
+)
+
+__log_msg -m "install_manifest.txt: ${install_dirs[*]}" -i
 
 ## Functions
 ################################################################################
@@ -61,68 +75,57 @@ function compare_catch2_versions() {
 # BEGIN SCRIPT
 cd "${project_source_DIR}"
 
-if [[ ! -d "${temp_DIR}" ]]; then
-  mkdir -p "${temp_DIR}"
+__log_msg -i -m 'updating submodules...'
+git submodule foreach git pull
+
+__log_msg -m 'going to catch2 dir' -i
+cd "${project_source_DIR}/share/catch2"
+
+if [[ -d "${project_source_DIR}/share/catch2/build" ]]; then
+  rm -rf "${project_source_DIR}/share/catch2/build"
+  mkdir -p "${project_source_DIR}/share/catch2/build"
 else
-  rm -rf "${temp_DIR}"
-  mkdir -p "${temp_DIR}"
+  mkdir -p "${project_source_DIR}/share/catch2/build"
 fi
-
-cd "${temp_DIR}"
-
-git clone 'https://github.com/catchorg/Catch2.git' "${temp_DIR}/catch2"
-cd "${temp_DIR}/catch2"
-
-if [[ -d "${project_source_DIR}/include/catch2" ]]; then
-  rm -r "${project_source_DIR}/include/catch2"
-fi
-
-if [[ -d "${project_source_DIR}/build" ]]; then
-  rm -r "${project_source_DIR}/build"
-fi
-mkdir -p "${project_source_DIR}/build"
 
 cmake '-Bbuild' '-H.' \
-  "-DCMAKE_INSTALL_PREFIX=${project_source_DIR}" \
   '-DBUILD_TESTING=OFF' \
   '-DCATCH_BUILD_EXAMPLES=OFF' \
   '-DCATCH_BUILD_TESTING=OFF' \
   '-DCATCH_INSTALL_DOCS=OFF' \
   '-DCATCH_INSTALL_HELPERS=on'
-export DEST_DIR="${project_source_DIR}"
-cmake --build build/ --target install
+sudo cmake --build build/ --target install
 
-if [[ -d "${project_source_DIR}/cmake/Catch2" ]]; then
-  rm -r "${project_source_DIR}/cmake/Catch2"
-fi
+rm -rf "${project_source_DIR}/share/catch2/build"
 
-mkdir "${project_source_DIR}/cmake/Catch2"
-cp -v -r "$project_source_DIR/lib/cmake/Catch2" "$project_source_DIR/cmake/Catch2"
+__log_msg -s -m 'Install complete.'
+cd "${project_source_DIR}"
 
-declare delete_this_config_string
-delete_this_config_string='\"\$\{CMAKE_CURRENT_LIST_DIR\}\/..\/..\/..\/\"'
-use_this_config_string='\"\$\{CMAKE_CURRENT_LIST_DIR\}\/..\/..\/\"'
-declare delete_this_target_line
-delete_this_target_line='get_filename_component(_IMPORT_PREFIX \"\$\{_IMPORT_PREFIX\}\" PATH\)'
+# declare delete_this_config_string
+# delete_this_config_string='\"\$\{CMAKE_CURRENT_LIST_DIR\}\/..\/..\/..\/\"'
+# use_this_config_string='\"\$\{CMAKE_CURRENT_LIST_DIR\}\/..\/..\/\"'
+# declare delete_this_target_line
+# delete_this_target_line='get_filename_component(_IMPORT_PREFIX \"\$\{_IMPORT_PREFIX\}\" PATH\)'
 
-sed -i \
-  "s/${delete_this_config_string}/${use_this_config_string}/g" \
-  "${project_source_DIR}/cmake/Catch2/Catch2Config.cmake"
+# sed -i \
+  # "s/${delete_this_config_string}/${use_this_config_string}/g" \
+  # "${project_source_DIR}/cmake/Catch2/Catch2Config.cmake"
 
-declare count
-count=0
-for ((i = 1; i < count + 1; i++)); do
-  sed -n "/${delete_this_target_line}/q;p" \
-    "${project_source_DIR}/cmake/Catch2/Catch2Targets.cmake"
-done
+# declare count
+# count=0
+# for ((i = 1; i < count + 1; i++)); do
+# sed -n "/${delete_this_target_line}/q;p" \
+    # "${project_source_DIR}/cmake/Catch2/Catch2Targets.cmake"
 
-rm -rf "${project_source_DIR:?}/lib"
-rm -rf "${project_source_DIR:?}/share"
+# done
 
-cd "${prev_DIR}"
+# rm -rf "${project_source_DIR:?}/lib"
+# rm -rf "${project_source_DIR:?}/share"
+
+# cd "${prev_DIR}"
 
 # Delete temp dir
-rm -rf "${temp_DIR}"
+# rm -rf "${temp_DIR}"
 
 # Unset script options
 set -u errexit

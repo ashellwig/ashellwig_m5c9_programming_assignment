@@ -1,0 +1,6 @@
+[submodule "share/catch2"]
+	path = share/catch2
+	url = https://github.com/catchorg/catch2.git
+[submodule "cmake/modules/UseLatexMk"]
+	path = cmake/modules/UseLatexMk
+	url = git@github.com:ashellwig/UseLatexMk.git

@@ -53,8 +53,7 @@
         "-std=gnu++2a", // Change this to -std=c++20 if llvm (clang++)
         "-DDEBUG",
         "-Iinclude",
-        "-Itest/include",
-        "-isystem include/catch2"
+        "-isystem catch2"
     ],
     "C_Cpp.clang_format_sortIncludes": true,
     // CMAKE
@@ -90,6 +89,25 @@
     ],
     "doxdocgen.file.versionTag": "@version 0.1.0",
     "doxdocgen.generic.authorTag": "@author {author} <{email}>",
+    /* Perl */
+    "perl-toolbox.lint.exec": "/home/ahellwig/perl5/bin/perlcritic",
+    "perl-toolbox.lint.path": "/home/ahellwig/perl5/bin/perlcritic",
+    "perl-toolbox.syntax.includePaths": [
+        "/home/ahellwig/perl5/lib/perl5",
+        "/usr/lib/perl5/5.30/core_perl",
+        "/usr/lib/perl5/5.30/vendor_perl"
+    ],
+    "perl-toolbox.lint.useProfile": true,
+    "perl-toolbox.lint.highlightMode": "word",
+    "perl-toolbox.syntax.enabled": false,
+    "perl-toolbox.syntax.exec": "/usr/bin/perl",
+    "perl-toolbox.syntax.path": "/usr/bin/perl",
+    "perl-toolbox.lint.enabled": false,
+    "simple-perl.perlcritic": "/home/ahellwig/perl5/bin/perlcritic",
+    "simple-perl.perltidy": "/home/ahellwig/perl5/bin/perltidy",
+    "simple-perl.perltidyArgs": [
+        "-q"
+    ],
     /* Latex */
     "[latex]": {
         "editor.formatOnPaste": false,
@@ -247,8 +265,14 @@
         "latexmk",
         "wpragmas"
     ],
+    /* License */
+    "licenser.author": "Ashton Hellwig",
+    "licenser.license": "LGPLv3",
+    "licenser.projectName": "ashellwig_m5c9_programming_assignment",
+    "licenser.disableAutoHeaderInsertion": true,
     /* Files */
     "files.exclude": {
+        ".tidyall.d": true,
         "**/.git": true,
         "**/.svn": true,
         "**/.hg": true,
@@ -273,10 +297,15 @@
         // Shell Scripts (Executable)
         "/scripts/get_project_dir": "shellscript",
         "/scripts/update_catch2": "shellscript",
+        "/scripts/uninstall_catch2": "shellscript",
         // Cmake
         "*.txt": "cmake",
         "*.cmake.*": "cmake",
         "*.cmake": "cmake",
+        // LaTeX
+        ".latexmkrc": "perl",
+        ".perlcriticrc": "perl",
+        ".tidyallrc": "ini",
         // Misc
         "*.html": "html",
         // C++

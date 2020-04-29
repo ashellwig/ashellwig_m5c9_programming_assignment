@@ -4,6 +4,9 @@
 ## Ashton Hellwig
 ##
 
+# Perl
+**/.tidyall.d/**
+
 # Tex
 doc/user_docs/main.*
 !doc/user_docs/main.bib
@@ -358,7 +361,7 @@ install-sh
 Makefile.in
 missing
 *.log
-
-share/
 /lib/
-!cmake/lib/Catch2
+
+# Catch2
+share/catch2/build/**

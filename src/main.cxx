@@ -28,9 +28,15 @@ int main() {
                     "ashellwig_m5c9_programming_assignment/data/Ch9Ex2/"
                     "Ch9Ex2Data.txt";
 
-  chapter9::StudentType student(fileName, 0);
+  chapter9::StudentType students[20];
 
-  student.print();
+  for (int i = 0; i < 20; i++) {
+    students[i] = chapter9::StudentType(fileName, i);
+  }
+
+  std::string thirdStudentFName = students[3].getFirstName();
+
+  std::cout << thirdStudentFName << std::endl;
 
   // "Press enter to continue..."
   general_functions::pauseprompt();
