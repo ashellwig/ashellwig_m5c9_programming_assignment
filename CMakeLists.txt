@@ -37,28 +37,22 @@ find_package(Catch2 REQUIRED)
 
 # --- Assignment Solution Target---
 ## Executable
+enable_testing()
 add_executable(${PROJECT_NAME} ${SRC_FILES})
+add_executable(ashwig_test ${TEST_SRC_FILES})
+target_link_libraries(ashwig_test Catch2::Catch2)
 
 
 # --- Testing Target ---
-enable_testing()
-target_link_libraries(${PROJECT_NAME} Catch2::Catch2)
 include(CTest)
-include(Catch)
-catch_discover_tests(${PROJECT_NAME}
-                     EXTRA_ARGS
-                     "--success \
-                     --reporter console \
-                     --use-colour yes \
-                     --durations no \
-                     --filenames-as-tags \
-                     --verbosity normal")
+include(ParseAndAddCatchTests)
+ParseAndAddCatchTests(ashwig_test)
 
 
 # --- Uninstall Target ---
 if (NOT TARGET uninstall)
   configure_file(
-    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/UninstallTarget/cmake_uninstall.cmake.in"
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/UninstallTarget/cmake_uninstall.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
     IMMEDIATE @ONLY)
 
