@@ -362,4 +362,3 @@ missing
 
 # Catch2
 share/catch2/build/**
-!share/catch2/build/install_manifest.txt

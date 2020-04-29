@@ -14,6 +14,26 @@ update_catch2_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
 declare -g project_source_DIR
 project_source_DIR="$(dirname "${update_catch2_DIR}")"
 
+declare -a -g install_dirs
+install_dirs=(
+  '/usr/local/lib/cmake/Catch2/Catch2Targets.cmake'
+  '/usr/local/include/catch2/catch_reporter_automake.hpp'
+  '/usr/local/include/catch2/catch.hpp'
+  '/usr/local/include/catch2/catch_reporter_tap.hpp'
+  '/usr/local/include/catch2/catch_reporter_teamcity.hpp'
+  '/usr/local/include/catch2/catch_reporter_sonarqube.hpp'
+  '/usr/local/lib/cmake/Catch2/Catch2Config.cmake'
+  '/usr/local/lib/cmake/Catch2/Catch2ConfigVersion.cmake'
+  '/usr/local/lib/cmake/Catch2/ParseAndAddCatchTests.cmake'
+  '/usr/local/lib/cmake/Catch2/Catch.cmake'
+  '/usr/local/lib/cmake/Catch2/CatchAddTests.cmake'
+  '/usr/local/share/Catch2/gdbinit'
+  '/usr/local/share/Catch2/lldbinit'
+  '/usr/local/share/pkgconfig/catch2.pc'
+)
+
+__log_msg -m "install_manifest.txt: ${install_dirs[*]}" -i
+
 ## Functions
 ################################################################################
 # Determines the currently installed version of Catch2 and compares it to the

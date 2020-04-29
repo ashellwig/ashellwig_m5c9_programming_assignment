@@ -53,8 +53,7 @@
         "-std=gnu++2a", // Change this to -std=c++20 if llvm (clang++)
         "-DDEBUG",
         "-Iinclude",
-        "-Itest/include",
-        "-isystem include/catch2"
+        "-isystem catch2"
     ],
     "C_Cpp.clang_format_sortIncludes": true,
     // CMAKE
@@ -273,6 +272,7 @@
         // Shell Scripts (Executable)
         "/scripts/get_project_dir": "shellscript",
         "/scripts/update_catch2": "shellscript",
+        "/scripts/uninstall_catch2": "shellscript",
         // Cmake
         "*.txt": "cmake",
         "*.cmake.*": "cmake",
