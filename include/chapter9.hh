@@ -32,6 +32,7 @@ namespace chapter9 {
 
 struct StudentType {
   StudentType(const char *, int); //*< Constructor.
+  StudentType();                  //*< Constructor.
   // Print Functions
   void print() const; //*< Print function.
 

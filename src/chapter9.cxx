@@ -45,6 +45,13 @@ int chapter9::StudentType::getTestScore() const { return m_testScore; }
 
 char chapter9::StudentType::getLetterGrade() const { return m_grade; }
 
+chapter9::StudentType::StudentType() {
+  m_studentFName = "";
+  m_studentLName = "";
+  m_testScore = 0;
+  m_grade = 'F';
+}
+
 chapter9::StudentType::StudentType(const char *fileName, int lineNo = 0)
     : m_file(fileName) {
   int totalLines;
@@ -101,6 +108,7 @@ void chapter9::StudentType::setLetterGrade(int score) {
 }
 
 void chapter9::StudentType::print() const {
-  std::cout << this->m_studentFName << ", " << this->m_studentLName << " "
-            << this->m_testScore << " " << this->m_grade << std::endl;
+
+  std::cout << m_studentFName << ", " << m_studentLName << " " << m_testScore
+            << " " << m_grade << std::endl;
 }
