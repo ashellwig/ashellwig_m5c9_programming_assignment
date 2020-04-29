@@ -1,0 +1,8 @@
+[PerlTidy]
+select = **/*.{pl,pm,t}
+argv = -noll -it=2
+
+[PerlCritic]
+select = lib/**/*.pm
+ignore = .latexmkrc
+argv = -severity 3

@@ -1,0 +1,46 @@
+#!/bin/bash
+
+## Set Script Options
+set -o errexit
+set -o pipefail
+set -o nounset
+
+## Variables
+declare -g uninstall_catch2_DIR
+uninstall_catch2_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+# shellcheck source=scripts/lib/lib.sh
+. "${uninstall_catch2_DIR}/lib/lib.sh"
+
+declare -g project_source_DIR
+project_source_DIR="$(dirname "${uninstall_catch2_DIR}")"
+
+declare -a -g installed_files
+installed_files=(
+  '/usr/local/lib/cmake/Catch2/Catch2Targets.cmake'
+  '/usr/local/include/catch2/catch_reporter_automake.hpp'
+  '/usr/local/include/catch2/catch.hpp'
+  '/usr/local/include/catch2/catch_reporter_tap.hpp'
+  '/usr/local/include/catch2/catch_reporter_teamcity.hpp'
+  '/usr/local/include/catch2/catch_reporter_sonarqube.hpp'
+  '/usr/local/lib/cmake/Catch2/Catch2Config.cmake'
+  '/usr/local/lib/cmake/Catch2/Catch2ConfigVersion.cmake'
+  '/usr/local/lib/cmake/Catch2/ParseAndAddCatchTests.cmake'
+  '/usr/local/lib/cmake/Catch2/Catch.cmake'
+  '/usr/local/lib/cmake/Catch2/CatchAddTests.cmake'
+  '/usr/local/share/Catch2/gdbinit'
+  '/usr/local/share/Catch2/lldbinit'
+  '/usr/local/share/pkgconfig/catch2.pc'
+)
+
+__log_msg -m "installed_files: ${installed_files[*]}" -i
+
+for file in "${installed_files[@]}"; do
+  sudo rm "$file"
+done
+
+__log_msg -m "Successfully removed all files."
+
+unset -o errexit
+unset -o pipefail
+unset -o nounset
+unset installed_files

@@ -1,5 +1,5 @@
-#include "../include/catch2/catch.hpp"
 #include "../include/chapter9.hh"
+#include <catch2/catch.hpp>
 
 SCENARIO("Example", "[example]") {
   GIVEN("An example") {

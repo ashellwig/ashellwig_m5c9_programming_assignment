@@ -97,7 +97,7 @@ function __log_msg() {
       if [ "$_opt_MSG_ERROR" = true ]; then
         echo -e "${print_colors["bold"]}[$(date +'%Y-%m-%dT%H:%M:%S%z')]:${print_colors["normal"]}${print_colors["red"]} $_opt_MESSAGE${print_colors["normal"]}" >&2
       elif [ "$_opt_MSG_INFO" = true ]; then
-        echo -e "${print_colors["standout"]}[$(date +'%Y-%m-%dT%H:%M:%S%z')]:${print_colors["normal"]}${print_colors["blue"]} $_opt_MESSAGE${print_colors["normal"]}"
+        echo -e "${print_colors["bold"]}[$(date +'%Y-%m-%dT%H:%M:%S%z')]:${print_colors["normal"]}${print_colors["blue"]} $_opt_MESSAGE${print_colors["normal"]}"
       elif [ "$_opt_MSG_SUCCESS" = true ]; then
         echo -e "${print_colors["bold"]}[$(date +'%Y-%m-%dT%H:%M:%S%z')]:${print_colors["normal"]}${print_colors["green"]} $_opt_MESSAGE${print_colors["normal"]}"
       fi
