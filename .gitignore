@@ -4,6 +4,9 @@
 ## Ashton Hellwig
 ##
 
+# Perl
+**/.tidyall.d/**
+
 # Tex
 doc/user_docs/main.*
 !doc/user_docs/main.bib

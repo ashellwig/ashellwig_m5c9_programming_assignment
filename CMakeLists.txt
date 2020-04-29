@@ -1,57 +1,58 @@
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.17.0)
 project(ashellwig_m5c9_programming_assignment LANGUAGES CXX VERSION 0.0.1)
 
-include(CTest)
-enable_testing()
-
+# -- Config ---
+## CPACK SETTINGS
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 set(CPACK_PACKAGE_VENDOR "Ashton Hellwig <ahellwig@student.cccs.edu>")
 set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Programming assignment solution for Module 5 Chapter 9 in CSC160-C11 at FRCC/CCCO in SP2020.")
 set(CPACK_SOURCE_GENERATOR "TGZ;ZIP")
 include(CPack)
-
-
-cmake_minimum_required(VERSION 3.5)
-
-# -- Variables ---
-# CMAKE
-set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" "${CMAKE_CURRENT_SOURCE_DIR}/cmake" "${CMAKE_CURRENT_SOURCE_DIR}/cmake/UninstallTarget")
-list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
-list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/Catch2")
-# Compiler
-set(CMAKE_CXX_FLAGS "-Wall -std=c++2a -Iinclude -isystem include/catch2")
-set(CMAKE_CXX_FLAGS_DEBUG "-Wall -pedantic -std=c++2a -Iinclude -isystem include/catch2")
+## CMAKE SETTINGS
+set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/out/cmake")
+set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}:${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules")
+## COMPILER SETTINGS
+set(CMAKE_CXX_FLAGS "-Wall -std=c++2a -Iinclude -isystem /usr/local/include/catch2")
+set(CMAKE_CXX_FLAGS_DEBUG "-Wall -std=c++2a -Iinclude -isystem /usr/local/include/catch2")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O2 -DNDEBUG")
-
-# Assignment Solution Target
 set(SRC_FILES
   ${CMAKE_CURRENT_SOURCE_DIR}/src/chapter9.cxx
   ${CMAKE_CURRENT_SOURCE_DIR}/src/general_functions.cxx
   ${CMAKE_CURRENT_SOURCE_DIR}/src/main.cxx
-  # ${CMAKE_CURRENT_SOURCE_DIR}/test/catch_main.cxx
-  # ${CMAKE_CURRENT_SOURCE_DIR}/test/TestCase.cxx
 )
 set(TEST_SRC_FILES
   ${CMAKE_CURRENT_SOURCE_DIR}/src/chapter9.cxx
   ${CMAKE_CURRENT_SOURCE_DIR}/test/catch_main.cxx
   ${CMAKE_CURRENT_SOURCE_DIR}/test/TestCase.cxx
 )
-set(CATCH_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include/catch2")
-include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include" "${CATCH_INCLUDE_DIR}")
-set(Catch2_DIR "/home/ahellwig/Documents/School/CSC160/Module-5/Programming-Assignments/ashellwig_m5c9_programming_assignment/cmake/Catch2")
+include_directories("${CMAKE_CURRENT_SOURCE_DIR}/include")
 
-# Testing
-include(CTest)
-enable_testing()
+# --- Dependencies ---
+## Catch2
+## https://github.com/catchorg/catch2.git (./share/catch2)
+## Utilized for unit testing
 find_package(Catch2 REQUIRED)
 
+
+# --- Assignment Solution Target---
+## Executable
 add_executable(${PROJECT_NAME} ${SRC_FILES})
 
-add_executable(ashwig_test ${TEST_SRC_FILES})
-include(Catch)
-catch_discover_tests(ashwig_test)
 
+# --- Testing Target ---
+enable_testing()
+target_link_libraries(${PROJECT_NAME} Catch2::Catch2)
+include(CTest)
+include(Catch)
+catch_discover_tests(${PROJECT_NAME}
+                     EXTRA_ARGS
+                     "--success \
+                     --reporter console \
+                     --use-colour yes \
+                     --durations no \
+                     --filenames-as-tags \
+                     --verbosity normal")
 
 
 # --- Uninstall Target ---

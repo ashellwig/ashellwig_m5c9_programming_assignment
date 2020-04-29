@@ -89,6 +89,25 @@
     ],
     "doxdocgen.file.versionTag": "@version 0.1.0",
     "doxdocgen.generic.authorTag": "@author {author} <{email}>",
+    /* Perl */
+    "perl-toolbox.lint.exec": "/home/ahellwig/perl5/bin/perlcritic",
+    "perl-toolbox.lint.path": "/home/ahellwig/perl5/bin/perlcritic",
+    "perl-toolbox.syntax.includePaths": [
+        "/home/ahellwig/perl5/lib/perl5",
+        "/usr/lib/perl5/5.30/core_perl",
+        "/usr/lib/perl5/5.30/vendor_perl"
+    ],
+    "perl-toolbox.lint.useProfile": true,
+    "perl-toolbox.lint.highlightMode": "word",
+    "perl-toolbox.syntax.enabled": false,
+    "perl-toolbox.syntax.exec": "/usr/bin/perl",
+    "perl-toolbox.syntax.path": "/usr/bin/perl",
+    "perl-toolbox.lint.enabled": false,
+    "simple-perl.perlcritic": "/home/ahellwig/perl5/bin/perlcritic",
+    "simple-perl.perltidy": "/home/ahellwig/perl5/bin/perltidy",
+    "simple-perl.perltidyArgs": [
+        "-q"
+    ],
     /* Latex */
     "[latex]": {
         "editor.formatOnPaste": false,
@@ -248,6 +267,7 @@
     ],
     /* Files */
     "files.exclude": {
+        ".tidyall.d": true,
         "**/.git": true,
         "**/.svn": true,
         "**/.hg": true,
@@ -277,6 +297,10 @@
         "*.txt": "cmake",
         "*.cmake.*": "cmake",
         "*.cmake": "cmake",
+        // LaTeX
+        ".latexmkrc": "perl",
+        ".perlcriticrc": "perl",
+        ".tidyallrc": "ini",
         // Misc
         "*.html": "html",
         // C++
