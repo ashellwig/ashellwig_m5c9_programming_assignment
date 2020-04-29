@@ -358,7 +358,7 @@ install-sh
 Makefile.in
 missing
 *.log
-
-share/
 /lib/
-!share/catch2
+
+# Catch2
+share/catch2/build
