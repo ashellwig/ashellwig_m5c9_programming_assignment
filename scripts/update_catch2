@@ -68,15 +68,15 @@ else
   mkdir -p "${project_source_DIR}/share/catch2/build"
 fi
 
-export DEST_DIR="${project_source_DIR}"
 cmake '-Bbuild' '-H.' \
-  "-DCMAKE_INSTALL_PREFIX=${project_source_DIR}" \
   '-DBUILD_TESTING=OFF' \
   '-DCATCH_BUILD_EXAMPLES=OFF' \
   '-DCATCH_BUILD_TESTING=OFF' \
   '-DCATCH_INSTALL_DOCS=OFF' \
   '-DCATCH_INSTALL_HELPERS=on'
-cmake --build build/ --target install
+sudo cmake --build build/ --target install
+
+rm -rf "${project_source_DIR}/share/catch2/build"
 
 __log_msg -s -m 'Install complete.'
 cd "${project_source_DIR}"
