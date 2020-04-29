@@ -361,4 +361,4 @@ missing
 
 share/
 /lib/
-!cmake/lib/Catch2
+!share/catch2
