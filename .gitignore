@@ -345,7 +345,7 @@ out/obj/test/*
 !out/doc/doxygen/.gitkeep
 !out/obj/.gitkeep
 !out/obj/test/.gitkeep
-
+data/Ch9Ex2Out.txt
 **/tmp/**
 
 *.gcda

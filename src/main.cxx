@@ -80,21 +80,24 @@ int main(int argc, char **argv) {
     }
   }
 
+  std::ofstream outputFile;
+  outputFile.open(outputFileName);
+
   // Check our work...
-  if (debugPrinting) {
+  if (outputFile.is_open()) {
     // All test scores
-    std::cout << "Student Name"
-              << "\t\t\t"
-              << "Test Score"
-              << "\t\t\t"
-              << "Grade" << std::endl;
+    outputFile << "Student Name"
+               << "\t\t\t"
+               << "Test Score"
+               << "\t\t\t"
+               << "Grade" << std::endl;
     for (int i = 0; i < 20; i++) {
-      std::cout << students[i].getLastName() << ", "
-                << students[i].getFirstName() << "\t\t\t\t"
-                << students[i].getTestScore() << "\t\t\t"
-                << students[i].getLetterGrade() << std::endl;
+      outputFile << students[i].getLastName() << ", "
+                 << students[i].getFirstName() << "\t\t\t\t"
+                 << students[i].getTestScore() << "\t\t\t"
+                 << students[i].getLetterGrade() << std::endl;
     }
-    std::cout << std::endl;
+    outputFile << std::endl;
 
     int highestScore = 0;
     for (int i = 0; i < 20; i++) {
@@ -104,17 +107,20 @@ int main(int argc, char **argv) {
     }
 
     // Highest test score
-    std::cout << "Highest test score: " << highestScore << std::endl;
+    outputFile << "Highest test score: " << highestScore << std::endl;
 
     // Students having highest score
-    std::cout << "Students having the highest test score:" << std::endl;
+    outputFile << "Students having the highest test score:" << std::endl;
     for (int i = 0; i < 20; i++) {
       if (students[i].m_testScore == highestScore) {
-        std::cout << students[i].getLastName() << ", "
-                  << students[i].getFirstName() << std::endl;
+        outputFile << students[i].getLastName() << ", "
+                   << students[i].getFirstName() << std::endl;
       }
     }
   }
+
+  inputFile.close();
+  outputFile.close();
 
   // "Press enter to continue..."
   general_functions::pauseprompt();
