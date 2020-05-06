@@ -214,7 +214,7 @@
         "--check-sourced",
         "--color=auto",
         "--format=tty",
-        "--source-path=scripts/lib/lib.sh",
+        "--source-path=SCRIPTDIR/lib/lib.sh",
         "--shell=bash",
         "--severity=style",
         "--external-sources"
@@ -225,7 +225,7 @@
     "shellcheck.ignorePatterns": {
         "**/*.zsh": true
     },
-    "shellcheck.useWorkspaceRootAsCwd": true,
+    "shellcheck.useWorkspaceRootAsCwd": false,
     /* General Tools */
     // Terminal
     "terminal.integrated.env.linux": {
