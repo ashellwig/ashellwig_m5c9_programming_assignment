@@ -16,6 +16,7 @@
 #include "../include/general_functions.hh"      // pauseprompt
 #include "../share/include/cxxopts/cxxopts.hpp" // Argument parsing
 #include <fstream>                              // std::fstream
+#include <iomanip>                              // std::setw & std::setfill
 #include <iostream>                             // std::cout
 #include <string>                               // std::string
 
@@ -81,10 +82,16 @@ int main(int argc, char **argv) {
 
   // Check our work...
   if (debugPrinting) {
+    std::cout << "Student Name"
+              << "\t\t\t"
+              << "Test Score"
+              << "\t\t\t"
+              << "Grade" << std::endl;
     for (int i = 0; i < 20; i++) {
-      std::cout << students[i].getFirstName() << students[i].getLastName()
-                << students[i].getTestScore() << students[i].getLetterGrade()
-                << std::endl;
+      std::cout << students[i].getFirstName() << " "
+                << students[i].getLastName() << "\t\t\t\t"
+                << students[i].getTestScore() << "\t\t\t"
+                << students[i].getLetterGrade() << std::endl;
     }
   }
 
