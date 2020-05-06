@@ -120,14 +120,32 @@ function cmake_build_and_run() {
 #   project_source_DIR
 ################################################################################
 function cmake_just_build() {
+  rm -rf "${build_DIR}" || exit 0
+  mkdir -p "${build_DIR}"
   if [[ -d "${build_DIR}" ]]; then
-    cd "${build_DIR}" || exit 2
-    cmake "${project_source_DIR}" -G "Unix Makefiles" "${cmake_config_args[*]}"
-    cmake --build . --target ashellwig_m5c9_programming_assignment
-    ./ashellwig_m5c9_programming_assignment
-    cd "${OLDPWD}"
+    __log_msg -i -m "Executing configure..."
+    cd "${build_DIR}"
+    cmake "${project_source_DIR}" \
+      -G "Unix Makefiles" \
+      -DCMAKE_CXX_COMPILER=/bin/g++ \
+      -DCMAKE_CXX_FLAGS='-Wall -std=c++2a -g -ggdb'
+
+    __log_msg -i -m "Executing build..."
+    cmake --build \
+      "${project_source_DIR}/build" \
+      --target ashellwig_m5c9_programming_assignment
+
+    __log_msg -s -m "Success. Moving to ${OLDPWD}"
+
+    if [[ -d "${OLDPWD}" ]]; then
+      cd "${OLDPWD}"
+      return 0
+    else
+      __log_msg -e -m "Failed to find ${OLDPWD}"
+      return 1
+    fi
   else
-    __log_msg -m "Unable to find build_DIR: ${build_DIR}" -e
+    __log_msg -e -m "Unable to find build_DIR: ${build_DIR}"
     return 1
   fi
 }
