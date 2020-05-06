@@ -306,7 +306,13 @@ cd ~/Downloads/ashellwig_m5c9_programming_assignment
             ]
 make debug
 
-./out/bin/ashellwig_m5c9_programming_assignment.bin # Run program
+export INPUT_FILE="${PWD}/data/Ch9Ex2/Ch9Ex2Data.txt"
+export OUTPUT_FILE="${PWD}/data/Ch9Ex2OUT.txt"
+
+./out/bin/ashellwig_m5c9_programming_assignment.bin \
+  -f "${INPUT_FILE}" \
+  -d "${OUTPUT_FILE}"
+cat "${OUTPUT_FILE}"  # Verify contents are present
 
 make clean-all # Removes object files, binaries, and docs
             \end{lstlisting}
@@ -317,12 +323,18 @@ make clean-all # Removes object files, binaries, and docs
             \textbf{with a terminal emulator or command prompt}, this will
             (most likely) mean running:
             \begin{lstlisting}[language=bash]
-cd ~/Downloads/ashellwig_m5c9_programming_assignment/out/bin
+cd ~/Downloads/ashellwig_m5c9_programming_assignment
             \end{lstlisting}
           \item To run the program simply issue this within the command
             prompt
             \begin{lstlisting}[language=bash]
-./build/ashellwig_m5c9_programming_assignment
+export INPUT_FILE="${PWD}/data/Ch9Ex2/Ch9Ex2Data.txt"
+export OUTPUT_FILE="${PWD}/data/Ch9Ex2OUT.txt"
+
+./out/bin/ashellwig_m5c9_programming_assignment.bin \
+  -f "${INPUT_FILE}" \
+  -d "${OUTPUT_FILE}"
+cat "${OUTPUT_FILE}"  # Verify contents are present
             \end{lstlisting}
         \end{enumerate}
         Of course if preferred, you may also navigate to the build folder in
