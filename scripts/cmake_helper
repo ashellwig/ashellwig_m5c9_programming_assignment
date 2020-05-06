@@ -1,6 +1,35 @@
-run_test() {
-  cd build || exit 2
-  cmake .. -G "Unix Makefiles"
-  cmake --build . --target ashwig_test
-  cmake --build . --target test
+#!/bin/bash
+
+## Set Script Options
+set -o errexit
+set -o pipefail
+set -o nounset
+
+## Variables
+declare -g cmake_helper_DIR
+cmake_helper_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+# shellcheck source=scripts/lib/lib.sh
+. "${cmake_helper_DIR}/lib/lib.sh"
+
+declare -g project_source_DIR
+project_source_DIR="$(dirname "${cmake_helper_DIR}")"
+
+__log_msg -m "project_source_DIR: ${project_source_DIR}" -i
+
+function run_tests() {
+  declare build_DIR
+  build_DIR="${project_source_DIR}/build"
+
+  if [[ -d "${build_DIR}" ]]; then
+    cd "${build_DIR}" || exit 2
+    cmake "${project_source_DIR}" -G "Unix Makefiles" "${CMAKE_CONFIG_ARGS}"
+    cmake --build . --target ashwig_test
+    cmake --build . --target test
+  else
+    __log_msg -m "Unable to find build_DIR: ${build_DIR}"
+  fi
+}
+
+function cmake_build_and_run() {
+  true
 }
