@@ -31,6 +31,7 @@
 namespace chapter9 {
 
 struct StudentType {
+public:
   StudentType(const char *, int); //*< Constructor.
   StudentType();                  //*< Constructor.
   // Print Functions
@@ -48,7 +49,7 @@ struct StudentType {
   int getTestScore() const;
   char getLetterGrade() const;
 
-private:
+  // Variables
   std::ifstream m_file;       //*< User's input file.
   std::string m_studentFName; //*< Student's first name.
   std::string m_studentLName; //*< Student's last Name.

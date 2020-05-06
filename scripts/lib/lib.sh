@@ -70,7 +70,7 @@ function __log_msg() {
           _opt_MSG_ERROR='true'
           ;;
         i)
-          _opt_MSG_ERROR='true'
+          _opt_MSG_ERROR='false'
           _opt_MSG_SUCCESS='false'
           _opt_MSG_INFO='true'
           ;;

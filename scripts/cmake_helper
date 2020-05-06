@@ -1,6 +1,221 @@
-run_test() {
-  cd build || exit 2
-  cmake .. -G "Unix Makefiles"
-  cmake --build . --target ashwig_test
-  cmake --build . --target test
+#!/bin/bash
+
+## --- Script Options ---
+set -o errexit
+set -o pipefail
+set -o nounset
+
+## --- Variables ---
+### DIRECTORIES
+declare -g -x cmake_helper_DIR
+cmake_helper_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" &> /dev/null && pwd)"
+
+# shellcheck source=SCRIPTDIR/lib/lib.sh
+. "${cmake_helper_DIR}/lib/lib.sh"
+
+declare -g -x project_source_DIR
+project_source_DIR="$(dirname "${cmake_helper_DIR}")"
+
+declare -g -x build_DIR
+build_DIR="${project_source_DIR}/build"
+
+declare -a -x include_dirs
+include_dirs=(
+  '-Iinclude'
+  '-isystem /usr/local/include/catch2'
+)
+
+declare -a -x cmake_config_args
+cmake_config_args=(
+  "-DCMAKE_CXX_COMPILER=/bin/g++"
+  "-DCMAKE_CXX_FLAGS=-Wall -std=c++2a -g -ggdb ${include_dirs[*]}"
+  "-G Unix Makefiles"
+)
+
+__log_msg -i -m "project_source_DIR: ${project_source_DIR}"
+
+# --- FUNCTIONS ---
+################################################################################
+# Displays a help message in relation to executing this script.
+################################################################################
+function display_help() {
+  cat << EOF
+usage: cmake_helper [-t|--test] [-b|--build] [-r|--build-and-run] [-v|--verbose]
+-t    --test              Run Tests
+-b    --build             Build Project
+-r    --build-and-run     Build and run project
+EOF
 }
+
+################################################################################
+# Runs the unit tests written with the `Catch2` library using `CMAKE` as the
+# build tool, `g++` as the compiler, and the suggested default `CXX_FLAGS`.
+# Globals:
+#   build_DIR
+#   cmake_config_args
+################################################################################
+function cmake_run_tests() {
+  if [[ -d "${build_DIR}" ]]; then
+    cd "${build_DIR}" || exit 2
+    cmake "${project_source_DIR}" "${cmake_config_args[*]}"
+    cmake --build . --target ashwig_test
+    cmake --build . --target test
+    cd "${OLDPWD}"
+  else
+    __log_msg -m "Unable to find build_DIR: ${build_DIR}"
+  fi
+}
+
+################################################################################
+# Builds the project with recommended options for linux with x86_64 hardware.
+# Globals:
+#   cmake_config_args
+#   build_DIR
+#   project_source_DIR
+# Outputs:
+#   The output file from the project solution will be located under
+#   "build/data/Ch9Ex2Out.txt" and takes
+#   "${project_source_DIR}/data/Ch9Ex2/Ch9Ex2Data.txt" as its input.
+################################################################################
+function cmake_build_and_run() {
+  rm -rf "${build_DIR}" || exit 0
+  mkdir -p "${build_DIR}"
+  if [[ -d "${build_DIR}" ]]; then
+    __log_msg -i -m "Executing configure..."
+    cd "${build_DIR}"
+    cmake "${project_source_DIR}" \
+      -G "Unix Makefiles" \
+      -DCMAKE_CXX_COMPILER=/bin/g++ \
+      -DCMAKE_CXX_FLAGS='-Wall -std=c++2a -g -ggdb'
+
+    __log_msg -i -m "Executing build..."
+    cmake --build \
+      "${project_source_DIR}/build" \
+      --target ashellwig_m5c9_programming_assignment
+
+    __log_msg -i -m "Executing program..."
+    ./ashellwig_m5c9_programming_assignment
+
+    __log_msg -s -m "Success. Moving to ${OLDPWD}"
+
+    if [[ -d "${OLDPWD}" ]]; then
+      cd "${OLDPWD}"
+      return 0
+    else
+      __log_msg -e -m "Failed to find ${OLDPWD}"
+      return 1
+    fi
+  else
+    __log_msg -e -m "Unable to find build_DIR: ${build_DIR}"
+    return 1
+  fi
+}
+
+################################################################################
+# Does the same as cmake_build_and_run() with the exception of running the final
+# program, and instead changes directory back into the "${project_source_DIR}".
+# Globals:
+#   cmake_config_args
+#   build_DIR
+#   project_source_DIR
+################################################################################
+function cmake_just_build() {
+  rm -rf "${build_DIR}" || exit 0
+  mkdir -p "${build_DIR}"
+  if [[ -d "${build_DIR}" ]]; then
+    __log_msg -i -m "Executing configure..."
+    cd "${build_DIR}"
+    cmake "${project_source_DIR}" \
+      -G "Unix Makefiles" \
+      -DCMAKE_CXX_COMPILER=/bin/g++ \
+      -DCMAKE_CXX_FLAGS='-Wall -std=c++2a -g -ggdb'
+
+    __log_msg -i -m "Executing build..."
+    cmake --build \
+      "${project_source_DIR}/build" \
+      --target ashellwig_m5c9_programming_assignment
+
+    __log_msg -s -m "Success. Moving to ${OLDPWD}"
+
+    if [[ -d "${OLDPWD}" ]]; then
+      cd "${OLDPWD}"
+      return 0
+    else
+      __log_msg -e -m "Failed to find ${OLDPWD}"
+      return 1
+    fi
+  else
+    __log_msg -e -m "Unable to find build_DIR: ${build_DIR}"
+    return 1
+  fi
+}
+
+################################################################################
+# Does the same as cmake_build_and_run() with the exception of running the final
+# program, and instead changes directory back into the "${project_source_DIR}".
+# Globals:
+#   cmake_config_args
+#   build_DIR
+#   project_source_DIR
+################################################################################
+function show_cmake_config() {
+  __log_msg -i -m "cmake_config_args = ${cmake_config_args[*]}"
+  __log_msg -i -m "build_DIR = ${build_DIR}"
+  __log_msg -i -m "project_source_DIR = ${project_source_DIR}"
+}
+
+while :; do
+  case "$1" in
+    -v | --verbose)
+      verbose="verbose"
+      shift
+      ;;
+    -h | --help)
+      display_help
+      exit 0
+      ;;
+    -t | --test)
+      cmake_run_tests
+      exit 0
+      ;;
+    -b | --build)
+      cmake_just_build
+      exit 0
+      ;;
+    -r | --build-and-run)
+      cmake_build_and_run
+      exit 0
+      ;;
+    -s | --show-cmake-config)
+      show_cmake_config
+      exit 0
+      ;;
+    --)
+      shift
+      break
+      ;;
+    -*)
+      __log_msg -m "Error: Unknown option: $1" -e >&2
+      exit 1
+      ;;
+    *) # No more options
+      break
+      ;;
+  esac
+done
+
+## --- Cleanup ---
+### Variables
+unset cmake_helper_DIR
+unset project_source_DIR
+unset build_DIR
+unset cmake_config_args
+### Function Helpers
+unset verbose
+### Functions
+unset display_help
+unset cmake_run_tests
+unset cmake_build_and_run
+unset cmake_just_build
+### Exit
+exit 0

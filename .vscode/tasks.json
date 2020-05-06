@@ -1,0 +1,55 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build",
+            "type": "shell",
+            "command": "/bin/bash",
+            "args": [
+                "${workspaceFolder}/scripts/cmake_helper",
+                "--build"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "Build and Run",
+            "type": "shell",
+            "command": "/bin/bash",
+            "args": [
+                "${workspaceFolder}/scripts/cmake_helper",
+                "--build-and-run"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            }
+        },
+        {
+            "label": "Test",
+            "type": "shell",
+            "command": "/bin/bash",
+            "args": [
+                "${workspaceFolder}/scripts/cmake_helper",
+                "--test"
+            ],
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        }
+    ]
+}
