@@ -1,7 +1,13 @@
-cmake_minimum_required(VERSION 3.17.0)
-project(ashellwig_m5c9_programming_assignment LANGUAGES CXX VERSION 0.0.1)
-
 # -- Config ---
+## COMPILER SETTINGS
+set(CMAKE_CXX_COMPILER g++)
+set(CMAKE_CXX_FLAGS "-Wall -std=c++2a -Iinclude -isystem /usr/local/include/catch2")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -g -ggdb")
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O2 -DNDEBUG")
+## PROJECT SETTINGS
+cmake_minimum_required(VERSION 3.17.0)
+project(ashellwig_m5c9_programming_assignment VERSION 0.0.1 LANGUAGES CXX)
+
 ## CPACK SETTINGS
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
@@ -12,10 +18,6 @@ include(CPack)
 ## CMAKE SETTINGS
 set(CMAKE_INSTALL_PREFIX "${CMAKE_CURRENT_SOURCE_DIR}/out/cmake")
 set(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}:${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/UninstallTarget:${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/UseLatexMk")
-## COMPILER SETTINGS
-set(CMAKE_CXX_FLAGS "-Wall -std=c++2a -Iinclude -isystem /usr/local/include/catch2")
-set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -g -ggdb")
-set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O2 -DNDEBUG")
 set(SRC_FILES
   ${CMAKE_CURRENT_SOURCE_DIR}/src/chapter9.cxx
   ${CMAKE_CURRENT_SOURCE_DIR}/src/general_functions.cxx

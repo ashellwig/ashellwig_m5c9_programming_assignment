@@ -21,7 +21,8 @@
           "/usr/local/include",
           "/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include-fixed",
           "/usr/include",
-          "${workspaceRoot}"
+          "${workspaceRoot}",
+          "${workspaceRoot}/share/include/cxxopts"
         ],
         "limitSymbolsToIncludedHeaders": true
       },
@@ -29,7 +30,7 @@
         "-std=gnu++2a",
         "-x",
         "c++",
-        "-isystem catch2"
+        "-isystem share/include/cxxopts"
       ],
       "cStandard": "c11",
       "cppStandard": "c++20"
