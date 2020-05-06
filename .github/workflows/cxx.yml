@@ -1,0 +1,19 @@
+name: C/C++ CI
+
+on:
+  release:
+    types: [published, created, edited]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2.1.0
+
+      - name: build
+        run: make debug
+
+      - name: test
+        run: make unit-test
