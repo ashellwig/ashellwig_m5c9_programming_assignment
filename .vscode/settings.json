@@ -403,5 +403,10 @@
         "queue": "cpp",
         "stack": "cpp",
         "typeindex": "cpp"
-    }
+    },
+    "cSpell.ignoreWords": [
+        "bloggs",
+        "iinclude",
+        "isystem"
+    ]
 }

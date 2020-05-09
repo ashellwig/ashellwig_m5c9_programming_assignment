@@ -22,7 +22,8 @@
           "/usr/lib/gcc/x86_64-pc-linux-gnu/9.3.0/include-fixed",
           "/usr/include",
           "${workspaceRoot}",
-          "${workspaceRoot}/share/include/cxxopts"
+          "${workspaceRoot}/include/cxxopts",
+          "${workspaceRoot}/include/catch2"
         ],
         "limitSymbolsToIncludedHeaders": true
       },
