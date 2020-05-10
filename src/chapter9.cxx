@@ -14,45 +14,39 @@
  * @date 2020-04-24
  */
 
-#include "../include/chapter9.hh"
+#include "../include/Student.hh"
 #include <fstream>
 #include <iomanip>
 #include <iostream>
 #include <sstream>
 #include <string>
 
-void chapter9::StudentType::setFirstName(std::string firstName) {
+void StudentType::setFirstName(std::string firstName) {
   m_studentFName = firstName;
 }
 
-void chapter9::StudentType::setLastName(std::string lastName) {
+void StudentType::setLastName(std::string lastName) {
   m_studentLName = lastName;
 }
 
-void chapter9::StudentType::setTestScore(int testScore) {
-  m_testScore = testScore;
-}
+void StudentType::setTestScore(int testScore) { m_testScore = testScore; }
 
-std::string chapter9::StudentType::getFirstName() const {
-  return m_studentFName;
-}
+std::string StudentType::getFirstName() const { return m_studentFName; }
 
-std::string chapter9::StudentType::getLastName() const {
-  return m_studentLName;
-}
+std::string StudentType::getLastName() const { return m_studentLName; }
 
-int chapter9::StudentType::getTestScore() const { return m_testScore; }
+int StudentType::getTestScore() const { return m_testScore; }
 
-char chapter9::StudentType::getLetterGrade() const { return m_grade; }
+char StudentType::getLetterGrade() const { return m_grade; }
 
-chapter9::StudentType::StudentType() {
+StudentType::StudentType() {
   m_studentFName = "";
   m_studentLName = "";
   m_testScore = 0;
   m_grade = 'F';
 }
 
-chapter9::StudentType::StudentType(const char *fileName, int lineNo = 0)
+StudentType::StudentType(const char *fileName, int lineNo = 0)
     : m_file(fileName) {
   int totalLines;
   std::string line;
@@ -86,7 +80,7 @@ chapter9::StudentType::StudentType(const char *fileName, int lineNo = 0)
   setLetterGrade(testScore);
 }
 
-void chapter9::StudentType::setLetterGrade(int score) {
+void StudentType::setLetterGrade(int score) {
   if (score > 89)
     m_grade = 'A';
 
@@ -107,7 +101,7 @@ void chapter9::StudentType::setLetterGrade(int score) {
   }
 }
 
-void chapter9::StudentType::print() const {
+void StudentType::print() const {
 
   std::cout << m_studentFName << ", " << m_studentLName << " " << m_testScore
             << " " << m_grade << std::endl;

@@ -12,22 +12,23 @@
  * Date: 22 April 2020
  */
 
-#include "../include/chapter9.hh"          // TBD
+#include "../include/Student.hh"           // TBD
 #include "../include/general_functions.hh" // pauseprompt
-#include <fstream>                         // std::fstream
-#include <iomanip>                         // std::setw & std::setfill
-#include <iostream>                        // std::cout
-#include <string>                          // std::string
+#include "../options.hh"
+#include <fstream>  // std::fstream
+#include <iomanip>  // std::setw & std::setfill
+#include <iostream> // std::cout
+#include <string>   // std::string
 
-using chapter9::options::INPUT_FILE;
-using chapter9::options::OUTPUT_FILE;
+use options::INPUT_FILE;
+use options::OUTPUT_FILE;
 
 /**
  * @brief Performs the steps to execute the main application.
  */
 int main(int argc, char *argv[]) {
   // Parse opts & args
-  ashwig_parse(argc, argv);
+  options::ashwig_parse(argc, argv);
 
   // Define input/output file
   std::string inputFile = INPUT_FILE;
