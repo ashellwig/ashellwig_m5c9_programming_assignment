@@ -13,6 +13,7 @@
 #include <iomanip>
 #include <iostream>
 #include <string>
+#include <vector>
 
 // --- CONSTRUCTORS ---
 student::StudentType::StudentType() {
@@ -75,9 +76,22 @@ char student::StudentType::getLetterGrade() const { return m_grade; }
 
 // Misc. Functions
 int student::findHighestScore(const StudentType &students) {}
+std::string student::generateStudentNameString(StudentType student) {}
+int student::printStudentsWithHighestScore(StudentType students[],
+                                           int highScore) {
+  int lcv = 0; //*< Loop control variable.
+  std::vector<std::string> studentsWithHighScore;
 
-int student::printStudentsWithHighestScore(const StudentType &students,
-                                           int highScore) {}
+  while (lcv < 20) {
+    if (students[lcv].m_testScore == highScore) {
+
+      studentsWithHighScore.push_back(
+          student::generateStudentNameString(students[lcv]));
+    }
+
+    lcv++;
+  }
+}
 
 void student::readIntoArray(std::ifstream &inputFile, StudentType students[]) {
   int lcv = 0; //*< Loop control variable.

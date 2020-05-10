@@ -27,8 +27,10 @@ public:
   int m_testScore;            //*< Student's test score.
   char m_grade;               //*< Student's letter grade.
 };
-
+std::string student::generateStudentNameString(StudentType);
 int findHighestScore(const StudentType &);
-int printStudentsWithHighestScore(const StudentType &, int);
+int printStudentsWithHighestScore(const StudentType, int);
 void readIntoArray(std::ifstream &, StudentType[]);
+void assignGrades(StudentType &[]);
+
 } // namespace student
