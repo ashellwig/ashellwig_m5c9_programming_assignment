@@ -28,19 +28,8 @@ student::StudentType::StudentType(std::string fName, std::string lName,
   m_studentFName = fName;
   m_studentLName = lName;
   m_testScore = score;
-  this->setLetterGrade(score);
+  m_grade = this->setLetterGrade(score);
 }
-
-// --- SETTERS ---
-void student::StudentType::setFirstName(std::string fName) {
-  m_studentFName = fName;
-}
-
-void student::StudentType::setLastName(std::string lName) {
-  m_studentLName = lName;
-}
-
-void student::StudentType::setTestScore(int score) { m_testScore = score; }
 
 void student::StudentType::setLetterGrade(int score) {
   if (score > 89)
@@ -63,22 +52,15 @@ void student::StudentType::setLetterGrade(int score) {
   }
 }
 
-// --- GETTERS ---
-std::string student::StudentType::getFirstName() const {
-  return m_studentFName;
-}
-
-std::string student::StudentType::getLastName() const { return m_studentLName; }
-
-int student::StudentType::getTestScore() const { return m_testScore; }
-
-char student::StudentType::getLetterGrade() const { return m_grade; }
-
 // Misc. Functions
 int student::findHighestScore(const StudentType &students) {}
-std::string student::generateStudentNameString(StudentType student) {}
-int student::printStudentsWithHighestScore(StudentType students[],
-                                           int highScore) {
+
+std::string student::generateStudentNameString(StudentType student) {
+  return student.m_studentLName + ", " + student.m_studentLName;
+}
+
+std::vector<std::string>
+student::getStudentsWithHighestScore(StudentType students[], int highScore) {
   int lcv = 0; //*< Loop control variable.
   std::vector<std::string> studentsWithHighScore;
 

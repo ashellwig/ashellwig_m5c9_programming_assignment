@@ -14,14 +14,11 @@
 
 #include "../include/Student.hh"           // TBD
 #include "../include/general_functions.hh" // pauseprompt
-#include "../options.hh"
+#include "../include/options.hh"
 #include <fstream>  // std::fstream
 #include <iomanip>  // std::setw & std::setfill
 #include <iostream> // std::cout
 #include <string>   // std::string
-
-use options::INPUT_FILE;
-use options::OUTPUT_FILE;
 
 /**
  * @brief Performs the steps to execute the main application.
@@ -31,11 +28,18 @@ int main(int argc, char *argv[]) {
   options::ashwig_parse(argc, argv);
 
   // Define input/output file
-  std::string inputFile = INPUT_FILE;
-  std::string outputFile = OUTPUT_FILE;
+  std::string inputFileName = options::INPUT_FILE;
+  std::ifstream inputFile(inputFileName);
+  std::string outputFileName = options::OUTPUT_FILE;
+  std::ofstream outputFile(outputFileName);
 
-  // Check our work...
-  if (outputFile.is_open()) {
+  // Declare the array of our data
+  student::StudentType students[20];
+
+  student::readIntoArray(inputFile, students)
+
+      // Check our work...
+      if (outputFile.is_open()) {
     // All test scores
     outputFile << "Student Name"
                << "\t\t\t"
@@ -43,10 +47,10 @@ int main(int argc, char *argv[]) {
                << "\t\t\t"
                << "Grade" << std::endl;
     for (int i = 0; i < 20; i++) {
-      outputFile << students[i].getLastName() << ", "
-                 << students[i].getFirstName() << "\t\t\t\t"
-                 << students[i].getTestScore() << "\t\t\t"
-                 << students[i].getLetterGrade() << std::endl;
+      outputFile << students[i].m_studentLName() << ", "
+                 << students[i].m_studentFName() << "\t\t\t\t"
+                 << students[i].m_testScore() << "\t\t\t"
+                 << students[i].m_grade() << std::endl;
     }
     outputFile << std::endl;
 
